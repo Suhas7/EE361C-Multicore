@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/suhas/Documents/361C/hw-template/hw2/q4/hw2_q4_a.c
+stdio.h
+-
+omp.h
+-
+stdlib.h
+-
+string.h
+-
+

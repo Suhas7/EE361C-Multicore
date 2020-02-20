@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="q4" targetName="q4" />
+    </generated>
+  </component>
+  <component name="CMakeSettings" AUTO_RELOAD="true">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f9e0de12-9aa3-4faa-9e45-4a557f447a5d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../out/production/hw2/q2/b/PIncrement$LamportMutex.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../out/production/hw2/q4/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/hw2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/hw2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/hw2/q3/Monkey.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/hw2/q3/Monkey.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/hw2/q3/SimpleTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/hw2/q3/SimpleTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/hw2/q4/hw2_q4_a.c" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/hw2/q4/hw2_q4_a.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../out/production/hw2/q4/hw2_q4_b.c" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/hw2/q4/hw2_q4_b.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../q3/Monkey.java" beforeDir="false" afterPath="$PROJECT_DIR$/../q3/Monkey.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../q3/SimpleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../q3/SimpleTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/hw2/q4/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/hw2/q4/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hw2_q4_a.c" beforeDir="false" afterPath="$PROJECT_DIR$/hw2_q4_a.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hw2_q4_b.c" beforeDir="false" afterPath="$PROJECT_DIR$/hw2_q4_b.c" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectId" id="1XxqKSIpX2v5LwM3GawzFwn9lmt" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="CPPToolchains" />
+  </component>
+  <component name="RunManager">
+    <configuration name="q4" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="&quot;mat_a.txt&quot; &quot;mat_b.txt&quot; 1" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="q4" TARGET_NAME="q4" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="q4" RUN_TARGET_NAME="q4">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f9e0de12-9aa3-4faa-9e45-4a557f447a5d" name="Default Changelist" comment="" />
+      <created>1581998028046</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1581998028046</updated>
+      <workItem from="1581998029475" duration="1032000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="159" y="121" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581999002480">
+      <screen x="0" y="0" width="1500" height="1000" />
+    </state>
+    <state x="159" y="121" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1500.1000@0.0.1500.1000" timestamp="1581999002480" />
+    <state x="532" y="256" key="FileChooserDialogImpl" timestamp="1581998398093">
+      <screen x="0" y="0" width="1500" height="1000" />
+    </state>
+    <state x="532" y="256" key="FileChooserDialogImpl/0.0.1500.1000@0.0.1500.1000" timestamp="1581998398093" />
+    <state width="1458" height="332" key="GridCell.Tab.0.bottom" timestamp="1581999063608">
+      <screen x="0" y="0" width="1500" height="1000" />
+    </state>
+    <state width="1458" height="332" key="GridCell.Tab.0.bottom/0.0.1500.1000@0.0.1500.1000" timestamp="1581999063608" />
+    <state width="1458" height="332" key="GridCell.Tab.0.center" timestamp="1581999063607">
+      <screen x="0" y="0" width="1500" height="1000" />
+    </state>
+    <state width="1458" height="332" key="GridCell.Tab.0.center/0.0.1500.1000@0.0.1500.1000" timestamp="1581999063607" />
+    <state width="1458" height="332" key="GridCell.Tab.0.left" timestamp="1581999063607">
+      <screen x="0" y="0" width="1500" height="1000" />
+    </state>
+    <state width="1458" height="332" key="GridCell.Tab.0.left/0.0.1500.1000@0.0.1500.1000" timestamp="1581999063607" />
+    <state width="1458" height="332" key="GridCell.Tab.0.right" timestamp="1581999063607">
+      <screen x="0" y="0" width="1500" height="1000" />
+    </state>
+    <state width="1458" height="332" key="GridCell.Tab.0.right/0.0.1500.1000@0.0.1500.1000" timestamp="1581999063607" />
+    <state width="1458" height="332" key="GridCell.Tab.1.bottom" timestamp="1581999063609">
+      <screen x="0" y="0" width="1500" height="1000" />
+    </state>
+    <state width="1458" height="332" key="GridCell.Tab.1.bottom/0.0.1500.1000@0.0.1500.1000" timestamp="1581999063609" />
+    <state width="1458" height="332" key="GridCell.Tab.1.center" timestamp="1581999063608">
+      <screen x="0" y="0" width="1500" height="1000" />
+    </state>
+    <state width="1458" height="332" key="GridCell.Tab.1.center/0.0.1500.1000@0.0.1500.1000" timestamp="1581999063608" />
+    <state width="1458" height="332" key="GridCell.Tab.1.left" timestamp="1581999063608">
+      <screen x="0" y="0" width="1500" height="1000" />
+    </state>
+    <state width="1458" height="332" key="GridCell.Tab.1.left/0.0.1500.1000@0.0.1500.1000" timestamp="1581999063608" />
+    <state width="1458" height="332" key="GridCell.Tab.1.right" timestamp="1581999063608">
+      <screen x="0" y="0" width="1500" height="1000" />
+    </state>
+    <state width="1458" height="332" key="GridCell.Tab.1.right/0.0.1500.1000@0.0.1500.1000" timestamp="1581999063608" />
+    <state x="252" y="143" key="SettingsEditor" timestamp="1581998141007">
+      <screen x="0" y="0" width="1500" height="1000" />
+    </state>
+    <state x="252" y="143" key="SettingsEditor/0.0.1500.1000@0.0.1500.1000" timestamp="1581998141007" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/hw2_q4_a.c</url>
+          <line>28</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/hw2_q4_a.c</url>
+          <line>90</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

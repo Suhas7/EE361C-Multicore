@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7d6771f2-8852-4e77-92fe-d69d6eb3a18f" name="Default Changelist" comment="remacede monkey with reentrantlock">
+      <change afterPath="$PROJECT_DIR$/out/production/hw2/q2/b/PIncrement$LamportMutex.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/hw2/q4/CMakeCache.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/hw2/q4/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/hw2/q4/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/hw2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hw2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/hw2/q3/Monkey.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hw2/q3/Monkey.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/hw2/q3/SimpleTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hw2/q3/SimpleTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/hw2/q4/hw2_q4_a.c" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hw2/q4/hw2_q4_a.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/hw2/q4/hw2_q4_b.c" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hw2/q4/hw2_q4_b.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q3/Monkey.java" beforeDir="false" afterPath="$PROJECT_DIR$/q3/Monkey.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q3/SimpleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/q3/SimpleTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q4/hw2_q4_a.c" beforeDir="false" afterPath="$PROJECT_DIR$/q4/hw2_q4_a.c" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>cond</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-12" />
+    <option name="y" value="-12" />
+    <option name="width" value="1526" />
+    <option name="height" value="2026" />
+  </component>
+  <component name="ProjectId" id="1Xxq4HznQ81swzT6nB7n0AgIka4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="q2.c" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.SimpleTest">
+    <configuration name="SimpleTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hw2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="q3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="q3" />
+      <option name="MAIN_CLASS_NAME" value="q3.SimpleTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SimpleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hw2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="q2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="q2" />
+      <option name="MAIN_CLASS_NAME" value="q2.SimpleTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SimpleTest.testOneDirectionMonkey" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hw2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="q3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="q3" />
+      <option name="MAIN_CLASS_NAME" value="q3.SimpleTest" />
+      <option name="METHOD_NAME" value="testOneDirectionMonkey" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SimpleTest.testTwoDirectionMonkey" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hw2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="q3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="q3" />
+      <option name="MAIN_CLASS_NAME" value="q3.SimpleTest" />
+      <option name="METHOD_NAME" value="testTwoDirectionMonkey" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SimpleTest.testTwoDirectionMonkeyWithKong" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hw2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="q3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="q3" />
+      <option name="MAIN_CLASS_NAME" value="q3.SimpleTest" />
+      <option name="METHOD_NAME" value="testTwoDirectionMonkeyWithKong" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.SimpleTest" />
+      <item itemvalue="JUnit.SimpleTest (1)" />
+      <item itemvalue="JUnit.SimpleTest.testOneDirectionMonkey" />
+      <item itemvalue="JUnit.SimpleTest.testTwoDirectionMonkey" />
+      <item itemvalue="JUnit.SimpleTest.testTwoDirectionMonkeyWithKong" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.SimpleTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7d6771f2-8852-4e77-92fe-d69d6eb3a18f" name="Default Changelist" comment="" />
+      <created>1581537976529</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1581537976529</updated>
+      <workItem from="1581997903038" duration="13000" />
+    </task>
+    <task id="LOCAL-00001" summary="remade monkey with reentrantlock&#10;still need to fix kong deadlock issue">
+      <created>1581886911014</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1581886911014</updated>
+    </task>
+    <task id="LOCAL-00002" summary="kong default flag">
+      <created>1581963052362</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1581963052362</updated>
+    </task>
+    <task id="LOCAL-00003" summary="attempted to put in condition variable">
+      <created>1581967940179</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1581967940179</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="SimpleTest_testTwoDirectionMonkeyWithKong - 2020.02.17 at 13h 27m 23s.xml">
+      <configuration name="SimpleTest.testTwoDirectionMonkeyWithKong" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SimpleTest_testTwoDirectionMonkeyWithKong - 2020.02.17 at 13h 28m 21s.xml">
+      <configuration name="SimpleTest.testTwoDirectionMonkeyWithKong" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SimpleTest_testTwoDirectionMonkeyWithKong - 2020.02.17 at 13h 28m 42s.xml">
+      <configuration name="SimpleTest.testTwoDirectionMonkeyWithKong" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SimpleTest_testTwoDirectionMonkeyWithKong - 2020.02.17 at 13h 29m 41s.xml">
+      <configuration name="SimpleTest.testTwoDirectionMonkeyWithKong" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SimpleTest_testTwoDirectionMonkeyWithKong - 2020.02.17 at 13h 35m 53s.xml">
+      <configuration name="SimpleTest.testTwoDirectionMonkeyWithKong" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SimpleTest_testTwoDirectionMonkeyWithKong - 2020.02.17 at 13h 37m 32s.xml">
+      <configuration name="SimpleTest.testTwoDirectionMonkeyWithKong" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SimpleTest_testTwoDirectionMonkeyWithKong - 2020.02.17 at 13h 39m 39s.xml">
+      <configuration name="SimpleTest.testTwoDirectionMonkeyWithKong" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SimpleTest_testTwoDirectionMonkeyWithKong - 2020.02.17 at 13h 40m 09s.xml">
+      <configuration name="SimpleTest.testTwoDirectionMonkeyWithKong" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SimpleTest_testTwoDirectionMonkeyWithKong - 2020.02.17 at 19h 02m 11s.xml">
+      <configuration name="SimpleTest.testTwoDirectionMonkeyWithKong" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SimpleTest_testTwoDirectionMonkeyWithKong - 2020.02.17 at 19h 05m 04s.xml">
+      <configuration name="SimpleTest.testTwoDirectionMonkeyWithKong" configurationId="JUnit" />
+    </history-entry>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="remade monkey with reentrantlock&#10;still need to fix kong deadlock issue" />
+    <MESSAGE value="kong default flag" />
+    <MESSAGE value="attempted to put in condition variable" />
+    <option name="LAST_COMMIT_MESSAGE" value="attempted to put in condition variable" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="monkey.getNumMonkeysOnRope()" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

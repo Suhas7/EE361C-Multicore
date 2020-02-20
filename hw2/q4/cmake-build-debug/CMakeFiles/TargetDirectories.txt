@@ -1,0 +1,3 @@
+C:/Users/suhas/Documents/361C/hw-template/hw2/q4/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/suhas/Documents/361C/hw-template/hw2/q4/cmake-build-debug/CMakeFiles/q4.dir
+C:/Users/suhas/Documents/361C/hw-template/hw2/q4/cmake-build-debug/CMakeFiles/rebuild_cache.dir
