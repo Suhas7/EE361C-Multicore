@@ -1,5 +1,7 @@
 package q5;
 
+import java.util.concurrent.locks.ReentrantLock;
+
 public class FineGrainedListSet implements ListSet {
     // you are free to add members
 
@@ -25,10 +27,11 @@ public class FineGrainedListSet implements ListSet {
     protected class Node {
         public Integer value;
         public Node next;
-
+        public ReentrantLock lock;
         public Node(Integer x) {
             value = x;
             next = null;
+            lock= new ReentrantLock();
         }
     }
 

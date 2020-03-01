@@ -4,7 +4,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class CoarseGrainedListSet implements ListSet {
-    // you are free to add members
     ReentrantLock RL = new ReentrantLock();
     Node s,t;
     AtomicInteger x= new AtomicInteger(0);
