@@ -1,5 +1,6 @@
 package queue;
 
+import java.util.EmptyStackException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.ReentrantLock;
@@ -30,7 +31,7 @@ public class LockQueue implements MyQueue {
     public Integer deq() {
         // implement your deq method here
         dLock.lock();
-        if(s.next==null) throw new EmptyException();
+        if(s.next==null) throw new EmptyStackException(); //todo wrong exception?
         int result = s.next.value;
         s=s.next;
         count.decrementAndGet();
