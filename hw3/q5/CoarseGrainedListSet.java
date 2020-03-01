@@ -1,13 +1,14 @@
 package q5;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class CoarseGrainedListSet implements ListSet {
     // you are free to add members
     ReentrantLock RL = new ReentrantLock();
     Node s,t;
+    AtomicInteger x= new AtomicInteger(0);
     public CoarseGrainedListSet() {
-        // implement your constructor here
         s = new Node(0);
         s.isTip=true;
         t = new Node(0);
@@ -16,21 +17,19 @@ public class CoarseGrainedListSet implements ListSet {
     }
 
     public boolean add(int value) {
-        // implement your add method here
         RL.lock();
-        Node pred=s;
-        while(pred.next.isTip==false && pred.next.value<value)
-            s=s.next;
-        if(pred.next.value==value) {RL.unlock();return false;}
+        System.out.println(x.incrementAndGet());
+        Node curr=s;
+        while(curr.next.isTip==false && curr.next.value<value){curr=curr.next;}
+        if(curr.next.value==value) {RL.unlock();return false;}
         Node newN = new Node(value);
-        newN.next=s.next;
-        s.next=newN;
+        newN.next=curr.next;
+        curr.next=newN;
         RL.unlock();
         return true;
     }
 
     public boolean remove(int value) {
-        // implement your remove method here
         RL.lock();
         Node curr=s;
         while(!curr.next.isTip && curr.next.value<value)curr=curr.next;
@@ -50,7 +49,7 @@ public class CoarseGrainedListSet implements ListSet {
         RL.lock(); //todo no need to lock bc read?
         Node curr=s;
         while(s!=t){
-            if(!curr.isTip && curr.value==value) return true;
+            if(!curr.isTip && curr.value==value){RL.unlock();return true;}
             curr=curr.next;
         }
         RL.unlock();
@@ -73,6 +72,9 @@ public class CoarseGrainedListSet implements ListSet {
       check simpleTest for more info
     */
     public String toString() {
+        String out="";
+        Node curr=s.next;
+        while(curr!=t) out+= ((Integer)curr.value).toString()+",";
         return "";
     }
 }
