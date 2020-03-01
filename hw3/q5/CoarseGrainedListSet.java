@@ -17,9 +17,9 @@ public class CoarseGrainedListSet implements ListSet {
 
     public boolean add(int value) {
         RL.lock();
-        System.out.println(x.incrementAndGet());
+        //System.out.println(x.incrementAndGet());
         Node curr=s;
-        while(curr.next.isTip==false && curr.next.value<value){curr=curr.next;}
+        while(!curr.next.isTip && curr.next.value<value){curr=curr.next;}
         if(curr.next.value==value) {RL.unlock();return false;}
         Node newN = new Node(value);
         newN.next=curr.next;
@@ -73,7 +73,10 @@ public class CoarseGrainedListSet implements ListSet {
     public String toString() {
         String out="";
         Node curr=s.next;
-        while(curr!=t) out+= ((Integer)curr.value).toString()+",";
-        return "";
+        while(curr!=t) {
+            out+= ((Integer)curr.value).toString()+",";
+            curr=curr.next;
+        }
+        return out;
     }
 }
