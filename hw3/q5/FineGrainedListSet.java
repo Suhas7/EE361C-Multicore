@@ -2,6 +2,8 @@ package q5;
 
 import java.util.concurrent.locks.ReentrantLock;
 
+import CoarseGrainedListSet.Node;
+
 public class FineGrainedListSet implements ListSet {
     // you are free to add members
 
@@ -40,6 +42,12 @@ public class FineGrainedListSet implements ListSet {
       check simpleTest for more info
     */
     public String toString() {
-        return "";
+    	String out="";
+        Node curr=s.next;
+        while(curr!=t) {
+            out+= ((Integer)curr.value).toString()+",";
+            curr=curr.next;
+        }
+        return out;
     }
 }

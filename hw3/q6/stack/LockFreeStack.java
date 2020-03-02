@@ -3,7 +3,7 @@ package stack;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class LockFreeStack implements MyStack {
-    AtomicReference<Node> top=null;
+    AtomicReference<Node> top = null;
 
     public LockFreeStack() {
         // implement your constructor here
@@ -16,9 +16,9 @@ public class LockFreeStack implements MyStack {
         while(!success){
             Node last=top.get();
             newNode.next=last;
-            success=top.compareAndSet(last,newNode);
+            success=top.compareAndSet(last, newNode);
         }
-        return false;
+        return true;
     }
 
     public Integer pop() throws EmptyStack {
@@ -28,7 +28,7 @@ public class LockFreeStack implements MyStack {
         while(!success){
             last = top.get();
             if(last==null) throw new EmptyStack();
-            success=top.compareAndSet(last,last.next);
+            success=top.compareAndSet(last, last.next);
         }
         return last.value;
     }
