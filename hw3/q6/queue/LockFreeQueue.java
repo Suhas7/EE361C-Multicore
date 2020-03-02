@@ -1,33 +1,33 @@
 package queue;
 
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.atomic.AtomicStampedReference;
 
 import LockFreeStack.Node;
 
 public class LockFreeQueue implements MyQueue {
     // you are free to add members
-	AtomicReference<Node> Head;
-	AtomicReference<Node> Tail;
+	AtomicStampedReference<Node> Head = new AtomicReference<Node>(new Node(null), 0);
+	AtomicStampedReference<Node> Tail = new AtomicReference<Node>(new Node(null), 0);
 
     public boolean enq(Integer value) {
         // implement your enq method here
     	Node node = new Node(value);
-    	node.next = null;
     	while(true) {
-    		tail = this.Tail;
-    		next = tail.next;
-    		if(tail == this.Tail) {
-    			if(next == null) {
-    				if(tail.next.compareAndSet(next, node)) {
+    		AtomicStampedReference<Node> tail = this.Tail;
+    		AtomicStampedReference<Node> next = tail.getReference().next;
+    		if(tail.getReference() == this.Tail.getReference()) {
+    			if(next.getReference() == null) {
+    				if(tail.compareAndSet(next, node, tail.getStamp(), tail.getStamp()+1)) {
     					break;
     				}
     			}
     			else {
-    				this.Tail.compareAndSet(this.tail, next);
+    				this.Tail.compareAndSet(tail.getReference(), next.getReference(), tail.getStamp(), tail.getStamp()+1);
     			}
     		}
     	}
-    	this.Tail.compareAndSet(tail, node);
+    	this.Tail.compareAndSet(tail.getReference(), node, tail.getStamp(), tail.getStamp()+1);
         return true;
     }
 
@@ -35,22 +35,22 @@ public class LockFreeQueue implements MyQueue {
         // implement your deq method here
     	Integer val = null;
     	while(true) {
-    		head = this.Head;
-    		tail = this.Tail;
-    		next = head.next;
-    		if (head == this.Head) {
-    			if(head == tail) {
-    				if(next == null) {
+    		AtomicStampedReference<Node> head = this.Head;
+    		AtomicStampedReference<Node> tail = this.Tail;
+    		AtomicStampedReference<Node> next = head.next;
+    		if (head.getReference() == this.Head.getReference()) {
+    			if(head.getReference() == tail.getReference()) {
+    				if(next.getReference() == null) {
     					return null;
     				}
     			}
     			else {
-    				this.Tail.compareAndSet(tail, next);
+    				this.Tail.compareAndSet(tail.getReference(), next.getReference(), tail.getStamp(), tail.getStamp()+1);
     			}
     		}
     		else {
-    			val = next.value;
-    			if (this.Head.compareAndSet(head, next)) {
+    			val = next.getReference().value;
+    			if (this.Head.compareAndSet(head.getReference(), next.getReference(), head.getStamp(), head.getStamp()+1)) {
     				break;
     			}
     		}
@@ -60,11 +60,12 @@ public class LockFreeQueue implements MyQueue {
 
     protected class Node {
         public Integer value;
-        public AtomicReference<Node> next;
+        public AtomicStampedReference<Node> next;
 
         public Node(Integer x) {
+        	int count = 0;
             value = x;
-            next = null;
+            next = new AtomicStampedReference<Node>(null, count);
         }
     }
 }

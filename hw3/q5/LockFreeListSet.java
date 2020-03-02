@@ -5,8 +5,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import LockFreeStack.Node;
 
 public class LockFreeListSet implements ListSet {
-	AtomicReference<Node> start = new Node(null);
-	AtomicReference<Node> end = new Node(null);
+	AtomicReference<Node> start = new AtomicReference<Node>(null);
+	AtomicReference<Node> end = new AtomicReference<Node>(null);
 
     public LockFreeListSet() {
     	start.next = end;
