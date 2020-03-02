@@ -1,12 +1,10 @@
 package q5;
 
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class CoarseGrainedListSet implements ListSet {
     ReentrantLock RL = new ReentrantLock();
     Node s,t;
-    AtomicInteger x= new AtomicInteger(0);
     public CoarseGrainedListSet() {
         s = new Node(0);
         s.isTip=true;

@@ -1,5 +1,6 @@
 package queue;
 
+<<<<<<< HEAD
 import java.util.concurrent.atomic.AtomicReference;
 
 import LockFreeStack.Node;
@@ -8,12 +9,20 @@ public class LockFreeQueue implements MyQueue {
     // you are free to add members
 	AtomicReference<Node> Head;
 	AtomicReference<Node> Tail;
+=======
+import stack.LockFreeStack;
 
+import java.util.concurrent.atomic.AtomicReference;
+>>>>>>> c60f1c59a5fda9eb77401d1d7be9296715d619de
+
+public class LockFreeQueue implements MyQueue {
+    AtomicReference<Node> s=new AtomicReference<>(),t=new AtomicReference<>();
     public LockFreeQueue() {
-        // implement your constructor here
+
     }
 
     public boolean enq(Integer value) {
+<<<<<<< HEAD
         // implement your enq method here
     	Node node = new Node(value);
     	node.next = null;
@@ -60,15 +69,43 @@ public class LockFreeQueue implements MyQueue {
     		}
     	}
         return val;
+=======
+        Node n = new Node(value);
+        boolean success=false;
+        while(!success){
+            Node currPoint = s.get();
+            n.next=currPoint;
+            if()
+            currPoint.last=n;
+            success=s.compareAndSet(currPoint,n);
+        }
+    }
+
+    public Integer deq() {
+        boolean success=false;
+        Node currPoint;
+        while(!success){
+            currPoint = t.get();
+            success=t.compareAndSet(currPoint,currPoint.last);
+        }
+        return currPoint;
+>>>>>>> c60f1c59a5fda9eb77401d1d7be9296715d619de
     }
 
     protected class Node {
         public Integer value;
+<<<<<<< HEAD
         public AtomicReference<Node> next;
+=======
+        public Node next;
+        public boolean isTip;
+        public Node last;
+>>>>>>> c60f1c59a5fda9eb77401d1d7be9296715d619de
 
         public Node(Integer x) {
             value = x;
             next = null;
+            isTip=false;
         }
     }
 }
