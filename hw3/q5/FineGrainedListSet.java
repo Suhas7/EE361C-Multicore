@@ -1,26 +1,65 @@
 package q5;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class FineGrainedListSet implements ListSet {
-    // you are free to add members
-
+    Node s,t;
     public FineGrainedListSet() {
-        // implement your constructor here
+        s = new Node(0);
+        s.isTip=true;
+        t = new Node(0);
+        t.isTip=true;
+        s.next=t;
     }
 
     public boolean add(int value) {
-        // implement your add method here
-        return false;
+        s.lock.lock();
+        Node curr=s;
+        while(!curr.next.isTip && curr.next.value<value){
+            curr.next.lock.lock();
+            curr.lock.unlock();
+            curr=curr.next;
+        }
+        if(curr.next.value==value) {curr.lock.unlock();return false;}
+        Node newN = new Node(value);
+        newN.next=curr.next;
+        curr.next=newN;
+        curr.lock.unlock();
+        return true;
     }
 
     public boolean remove(int value) {
-        // implement your remove method here
-        return false;
+        s.lock.lock();
+        Node curr=s;
+        while(!curr.next.isTip && curr.next.value<value){
+            curr.next.lock.lock();
+            curr.lock.unlock();
+            curr=curr.next;
+        }
+        if(curr.next.value==value) {
+            curr.next=curr.next.next;
+            curr.lock.unlock();
+            return true;
+        }else {
+            curr.lock.unlock();
+            return false;
+        }
     }
 
     public boolean contains(int value) {
-        // implement your contains method here
+        Node curr=s.next;
+        curr.lock.lock();
+        while(s!=t){
+            if(!curr.isTip && curr.value==value){
+                curr.lock.unlock();
+                return true;
+            }
+            curr.next.lock.lock();
+            curr.lock.unlock();
+            curr=curr.next;
+        }
+        if(t.lock.getHoldCount()>0) t.lock.unlock();
         return false;
     }
 
@@ -28,10 +67,12 @@ public class FineGrainedListSet implements ListSet {
         public Integer value;
         public Node next;
         public ReentrantLock lock;
+        public boolean isTip;
         public Node(Integer x) {
             value = x;
             next = null;
-            lock= new ReentrantLock();
+            lock = new ReentrantLock();
+            isTip = false;
         }
     }
 
@@ -40,6 +81,12 @@ public class FineGrainedListSet implements ListSet {
       check simpleTest for more info
     */
     public String toString() {
-        return "";
+        String out="";
+        Node curr=s.next;
+        while(curr!=t) {
+            out+= ((Integer)curr.value).toString()+",";
+            curr=curr.next;
+        }
+        return out;
     }
 }
