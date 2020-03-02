@@ -1,36 +1,20 @@
 package q5;
 
+import java.util.concurrent.atomic.AtomicMarkableReference;
 import java.util.concurrent.atomic.AtomicReference;
 
 import LockFreeStack.Node;
 
 public class LockFreeListSet implements ListSet {
-	AtomicReference<Node> start = new AtomicReference<Node>(null);
-	AtomicReference<Node> end = new AtomicReference<Node>(null);
+	AtomicMarkableReference<Node> start = new AtomicMarkableReference<Node>(new Node(null), false);
+	AtomicMarkableReference<Node> end = new AtomicMarkableReference<Node>(new Node(null), false);
 
     public LockFreeListSet() {
-    	start.next = end;
+    	start.getReference().next = end.getReference();
     }
 
     public boolean add(int value) {
-        Node curr=start;
-        Node node = new Node(value);
         
-        while (true) {
-	        while(!curr.next != end && curr.next.value<value && cur.next != null) {
-	        	curr=curr.next;
-	        }
-	        if(curr.next.value == value || cur.next == null) {
-	        	return false;
-	        }
-	        next = curr.next;
-	        if(next == cur.next && next != null) {
-	        	if(curr.next.compareAndSet(cur.next, node)) {
-	        		node.next = cur.next;
-	        		break;
-	        	}
-	        }
-        }
         return true;
     }
 
@@ -64,10 +48,10 @@ public class LockFreeListSet implements ListSet {
 
     protected class Node {
         public Integer value;
-        public AtomicReference<Node> next;
+        public AtomicMarkableReference<Node> next;
         public Node(Integer x) {
             value = x;
-            next = null;
+            next = new AtomicMarkableReference(null, false);
         }
     }
 

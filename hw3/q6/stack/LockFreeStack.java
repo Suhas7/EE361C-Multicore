@@ -3,7 +3,7 @@ package stack;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class LockFreeStack implements MyStack {
-    AtomicReference<Node> top = null;
+    AtomicReference<Node> top = AtomicReference<Node>(null);
 
     public LockFreeStack() {
         // implement your constructor here
