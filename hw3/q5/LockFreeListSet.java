@@ -14,34 +14,54 @@ public class LockFreeListSet implements ListSet {
     }
 
     public boolean add(int value) {
-        
+    	AtomicMarkableReference<Node> node = new AtomicMarkableReference<Node>(new Node(value), false);
+    	AtomicMarkableReference<Node> curr = start;
+        while(true) {
+        	while(!curr.getReference().next.getReference() != end.getReference() && curr.getReference().next.getReference().value < value && !curr.getReference().next.isMarked()) {
+        		curr = curr.getReference().next;
+        	}
+        	if(curr.getReference().value == value || curr.getReference() == end.getReference()) {
+        		return false;
+        	}
+        	AtomicMarkableReference<Node> next = curr.getReference().next
+        	node.getReference().next = next;
+        	if(curr.getReference().next.compareAndSet(next, node, false, false)) {
+        		break;
+        	}
+        }
         return true;
     }
 
     public boolean remove(int value) {
-    	// when you delete a node, make its next equal to null
-        Node curr=start;
+    	// when you delete a node, make its next equal to true
+    	//if cur.next is right, then we delete it
+    	AtomicMarkableReference<Node> curr = start;
         while(true) {
-	        while(!curr.next != end && curr.next.value < value && cur.next != null) {
-	        	curr = curr.next;
+        	while(!curr.getReference().next.getReference() != end.getReference() && curr.getReference().next.getReference().value < value) {
+        		curr = curr.getReference().next;
 	        }
-	        if(curr.next.isTip || curr.next.value!=value || cur.next == null){
+	        if(curr.getReference().next.getReference().value != value){
 	            return false;
 	        }
 	        else{
-	            curr.next = curr.next.next;
-	            return true;
+	        	AtomicMarkableReference<Node> next = curr.getReference().next;
+	        	if(next.getReference().next.compareAndSet(next.getReference().next.getReference(), next.getReference().next.getReference(), false, true)) {
+	        		if(curr.getReference().next.compareAndSet(next.getReference().next.getReference(), next.getReference().next.getReference(), false, false)) {
+	        			return true;
+	        		}
+	        	}
 	        }
         }
     }
 
     public boolean contains(int value) {
         // implement your contains method here
-    	Node cur = start.next;
-    	while(cur != end) {
-    		if(cur.value == value) {
+    	AtomicMarkableReference<Node> cur = start.getReference().next;
+    	while(cur.getReference() != end.getReference()) {
+    		if(cur.getReference().value == value && !cur.getReference().next.isMarked()) {
     			return true;
     		}
+    		cur = cur.getReference().next;
     	}
         return false;
     }
