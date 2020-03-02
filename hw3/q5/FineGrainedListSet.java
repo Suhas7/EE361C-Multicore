@@ -83,11 +83,6 @@ public class FineGrainedListSet implements ListSet {
       check simpleTest for more info
     */
     public String toString() {
-<<<<<<< HEAD
-    	String out="";
-=======
-        String out="";
->>>>>>> c60f1c59a5fda9eb77401d1d7be9296715d619de
         Node curr=s.next;
         while(curr!=t) {
             out+= ((Integer)curr.value).toString()+",";
