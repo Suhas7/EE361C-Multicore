@@ -3,22 +3,22 @@ package queue;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.atomic.AtomicStampedReference;
 
-import LockFreeStack.Node;
-
 public class LockFreeQueue implements MyQueue {
     // you are free to add members
-	AtomicStampedReference<Node> Head = new AtomicReference<Node>(new Node(null), 0);
-	AtomicStampedReference<Node> Tail = new AtomicReference<Node>(new Node(null), 0);
+	AtomicStampedReference<Node> Head = new AtomicStampedReference<Node>(new Node(null), 0);
+	AtomicStampedReference<Node> Tail = new AtomicStampedReference<Node>(new Node(null), 0);
 
     public boolean enq(Integer value) {
         // implement your enq method here
     	Node node = new Node(value);
+    	AtomicStampedReference<Node> tail = this.Tail;
+		AtomicStampedReference<Node> next = tail.getReference().next;
     	while(true) {
-    		AtomicStampedReference<Node> tail = this.Tail;
-    		AtomicStampedReference<Node> next = tail.getReference().next;
+    		tail = this.Tail;
+    		next = tail.getReference().next;
     		if(tail.getReference() == this.Tail.getReference()) {
     			if(next.getReference() == null) {
-    				if(tail.compareAndSet(next, node, tail.getStamp(), tail.getStamp()+1)) {
+    				if(tail.compareAndSet(next.getReference(), node, tail.getStamp(), tail.getStamp()+1)) {
     					break;
     				}
     			}
@@ -37,7 +37,7 @@ public class LockFreeQueue implements MyQueue {
     	while(true) {
     		AtomicStampedReference<Node> head = this.Head;
     		AtomicStampedReference<Node> tail = this.Tail;
-    		AtomicStampedReference<Node> next = head.next;
+    		AtomicStampedReference<Node> next = head.getReference().next;
     		if (head.getReference() == this.Head.getReference()) {
     			if(head.getReference() == tail.getReference()) {
     				if(next.getReference() == null) {
