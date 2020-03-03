@@ -3,8 +3,6 @@ package q5;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
-import CoarseGrainedListSet.Node;
-
 public class FineGrainedListSet implements ListSet {
     Node s,t;
     public FineGrainedListSet() {
@@ -83,6 +81,7 @@ public class FineGrainedListSet implements ListSet {
       check simpleTest for more info
     */
     public String toString() {
+    	String out="";
         Node curr=s.next;
         while(curr!=t) {
             out+= ((Integer)curr.value).toString()+",";

@@ -3,29 +3,28 @@ package q5;
 import java.util.concurrent.atomic.AtomicMarkableReference;
 import java.util.concurrent.atomic.AtomicReference;
 
-import LockFreeStack.Node;
 
 public class LockFreeListSet implements ListSet {
 	AtomicMarkableReference<Node> start = new AtomicMarkableReference<Node>(new Node(null), false);
 	AtomicMarkableReference<Node> end = new AtomicMarkableReference<Node>(new Node(null), false);
 
     public LockFreeListSet() {
-    	start.getReference().next = end.getReference();
+    	start.getReference().next.set(end.getReference(), false);
     }
 
     public boolean add(int value) {
     	AtomicMarkableReference<Node> node = new AtomicMarkableReference<Node>(new Node(value), false);
     	AtomicMarkableReference<Node> curr = start;
         while(true) {
-        	while(!curr.getReference().next.getReference() != end.getReference() && curr.getReference().next.getReference().value < value && !curr.getReference().next.isMarked()) {
+        	while(curr.getReference().next.getReference() != end.getReference() && curr.getReference().next.getReference().value < value && !curr.getReference().next.isMarked()) {
         		curr = curr.getReference().next;
         	}
         	if(curr.getReference().value == value || curr.getReference() == end.getReference()) {
         		return false;
         	}
-        	AtomicMarkableReference<Node> next = curr.getReference().next
+        	AtomicMarkableReference<Node> next = curr.getReference().next;
         	node.getReference().next = next;
-        	if(curr.getReference().next.compareAndSet(next, node, false, false)) {
+        	if(curr.getReference().next.compareAndSet(next.getReference(), node.getReference(), false, false)) {
         		break;
         	}
         }
@@ -37,7 +36,7 @@ public class LockFreeListSet implements ListSet {
     	//if cur.next is right, then we delete it
     	AtomicMarkableReference<Node> curr = start;
         while(true) {
-        	while(!curr.getReference().next.getReference() != end.getReference() && curr.getReference().next.getReference().value < value) {
+        	while(curr.getReference().next.getReference() != end.getReference() && curr.getReference().next.getReference().value < value) {
         		curr = curr.getReference().next;
 	        }
 	        if(curr.getReference().next.getReference().value != value){
@@ -71,7 +70,7 @@ public class LockFreeListSet implements ListSet {
         public AtomicMarkableReference<Node> next;
         public Node(Integer x) {
             value = x;
-            next = new AtomicMarkableReference(null, false);
+            next = new AtomicMarkableReference<Node>(null, false);
         }
     }
 
@@ -80,11 +79,11 @@ public class LockFreeListSet implements ListSet {
       check simpleTest for more info
     */
     public String toString() {
-    	String out="";
-        Node curr=s.next;
-        while(curr!=t) {
-            out+= ((Integer)curr.value).toString()+",";
-            curr=curr.next;
+    	String out = "";
+    	AtomicMarkableReference<Node> curr = start.getReference().next;
+        while(curr != end) {
+            out += ((Integer)curr.getReference().value).toString()+",";
+            curr = curr.getReference().next;
         }
         return out;
     }
