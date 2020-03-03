@@ -9,8 +9,8 @@ public class QueueTest {
         MyQueue list = new LockFreeQueue();
         makeThread(list);
         checkNode(list);
-        //makeRemovingThread(list);
-        //checkNode(list);
+        makeRemovingThread(list);
+        checkNode(list);
         //makeThread(list);
         //checkNode(list);
     }
