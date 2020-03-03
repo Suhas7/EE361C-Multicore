@@ -1,30 +1,30 @@
 package q5;
 
 import java.util.concurrent.atomic.AtomicMarkableReference;
-import java.util.concurrent.atomic.AtomicReference;
-
 
 public class LockFreeListSet implements ListSet {
-	AtomicMarkableReference<Node> start = new AtomicMarkableReference<Node>(new Node(null), false);
-	AtomicMarkableReference<Node> end = new AtomicMarkableReference<Node>(new Node(null), false);
-
+	Node start = new Node(-1);
+	Node end = new Node(-1);
+	
     public LockFreeListSet() {
-    	start.getReference().next.set(end.getReference(), false);
+    	start.next.set(end, false);
     }
 
     public boolean add(int value) {
-    	AtomicMarkableReference<Node> node = new AtomicMarkableReference<Node>(new Node(value), false);
-    	AtomicMarkableReference<Node> curr = start;
+    	Node node = new Node(value);
+    	Node prev = start;
+    	Node curr = start.next.getReference();
+    	
         while(true) {
-        	while(curr.getReference().next.getReference() != end.getReference() && curr.getReference().next.getReference().value < value && !curr.getReference().next.isMarked()) {
-        		curr = curr.getReference().next;
+        	while(curr != end && curr.value < value) {
+        		prev = curr;
+        		curr = curr.next.getReference();
         	}
-        	if(curr.getReference().value == value || curr.getReference() == end.getReference()) {
+        	if(curr.value == value && curr != end) {
         		return false;
         	}
-        	AtomicMarkableReference<Node> next = curr.getReference().next;
-        	node.getReference().next = next;
-        	if(curr.getReference().next.compareAndSet(next.getReference(), node.getReference(), false, false)) {
+        	node.next.set(curr, false);
+        	if(prev.next.compareAndSet(curr, node, false, false)) {
         		break;
         	}
         }
@@ -34,18 +34,19 @@ public class LockFreeListSet implements ListSet {
     public boolean remove(int value) {
     	// when you delete a node, make its next equal to true
     	//if cur.next is right, then we delete it
-    	AtomicMarkableReference<Node> curr = start;
+    	Node curr = start.next.getReference();
+    	Node prev = start;
         while(true) {
-        	while(curr.getReference().next.getReference() != end.getReference() && curr.getReference().next.getReference().value < value) {
-        		curr = curr.getReference().next;
+        	while(curr != end && curr.value < value) {
+        		prev = curr;
+        		curr = curr.next.getReference();
 	        }
-	        if(curr.getReference().next.getReference().value != value){
+	        if(curr.value != value){
 	            return false;
 	        }
 	        else{
-	        	AtomicMarkableReference<Node> next = curr.getReference().next;
-	        	if(next.getReference().next.compareAndSet(next.getReference().next.getReference(), next.getReference().next.getReference(), false, true)) {
-	        		if(curr.getReference().next.compareAndSet(next.getReference().next.getReference(), next.getReference().next.getReference(), false, false)) {
+	        	if(curr.next.compareAndSet(curr.next.getReference(), curr.next.getReference(), false, true)) {
+	        		if(prev.next.compareAndSet(prev.next.getReference(), curr.next.getReference(), false, false)) {
 	        			return true;
 	        		}
 	        	}
@@ -55,14 +56,14 @@ public class LockFreeListSet implements ListSet {
 
     public boolean contains(int value) {
         // implement your contains method here
-    	AtomicMarkableReference<Node> cur = start.getReference().next;
-    	while(cur.getReference() != end.getReference()) {
-    		if(cur.getReference().value == value && !cur.getReference().next.isMarked()) {
+    	Node curr = start.next.getReference();
+    	while(curr != end && curr.value < value) {
+    		curr = curr.next.getReference();
+    		if(curr.value == value && !curr.next.isMarked()) {
     			return true;
     		}
-    		cur = cur.getReference().next;
     	}
-        return false;
+    	return false;
     }
 
     protected class Node {
@@ -80,10 +81,10 @@ public class LockFreeListSet implements ListSet {
     */
     public String toString() {
     	String out = "";
-    	AtomicMarkableReference<Node> curr = start.getReference().next;
+    	Node curr = start.next.getReference(); 
         while(curr != end) {
-            out += ((Integer)curr.getReference().value).toString()+",";
-            curr = curr.getReference().next;
+            out += ((Integer)curr.value).toString()+",";
+            curr = curr.next.getReference();
         }
         return out;
     }

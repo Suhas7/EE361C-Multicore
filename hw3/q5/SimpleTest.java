@@ -13,6 +13,14 @@ public class SimpleTest {
     }
 
     @Test
+    public void testCoarseGrainedListSetRemoval() {
+        LockFreeListSet list = new LockFreeListSet();
+        makeThread(list);
+        makeThread_B(list);
+        checkRemoval(list);
+    }
+
+    @Test
     public void testFineGrainedListSet() {
         FineGrainedListSet list = new FineGrainedListSet();
         makeThread(list);
@@ -20,10 +28,45 @@ public class SimpleTest {
     }
 
     @Test
+    public void testFineGrainedListSetRemoval() {
+        LockFreeListSet list = new LockFreeListSet();
+        makeThread(list);
+        makeThread_B(list);
+        checkRemoval(list);
+    }
+
+    @Test
     public void testLockFreeListSet() {
         LockFreeListSet list = new LockFreeListSet();
         makeThread(list);
         checkNode(0, 3000, list);
+    }
+
+    @Test
+    public void testLockFreeListSetRemoval() {
+        LockFreeListSet list = new LockFreeListSet();
+        makeThread(list);
+        makeThread_B(list);
+        checkRemoval(list);
+    }
+
+    private void makeThread_B(ListSet list) {
+        Thread[] threads = new Thread[3];
+        threads[0] = new Thread(new Thread_B(0, 1000, list));
+        threads[1] = new Thread(new Thread_B(1001, 2000, list));
+        threads[2] = new Thread(new Thread_B(2001, 3000, list));
+        threads[1].start(); threads[0].start(); threads[2].start();
+        for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void checkRemoval(ListSet list) {
+        Assert.assertEquals(new StringBuilder().toString(), list.toString());
     }
 
     private void makeThread(ListSet list) {
@@ -70,4 +113,24 @@ public class SimpleTest {
             }
         }
     }
+
+    private class Thread_B implements Runnable {
+        int begin;
+        int end;
+        ListSet list;
+        Thread_B(int begin, int end, ListSet list) {
+            this.begin = begin;
+            this.end = end;
+            this.list = list;
+        }
+
+        @Override
+        public void run() {
+            for (int i = end; i >= begin; --i) {
+                list.remove(i);
+            }
+        }
+        
+    }
+
 }
