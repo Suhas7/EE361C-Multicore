@@ -51,17 +51,14 @@ public class QueueTest {
     }
 
     private class MyThread implements Runnable {
-
         int begin;
         int end;
         MyQueue list;
-
         MyThread(int begin, int end, MyQueue list) {
             this.begin = begin;
             this.end = end;
             this.list = list;
         }
-
         @Override
         public void run() {
             for (int i = begin; i <= end; ++i) {
@@ -70,17 +67,14 @@ public class QueueTest {
         }
     }
     private class MyThread2 implements Runnable {
-
         int begin;
         int end;
         MyQueue list;
-
         MyThread2(int remove, MyQueue list) {
             this.begin = remove;
             this.end = end;
             this.list = list;
         }
-
         @Override
         public void run() {
             for (int i = 0; i < begin; ++i) {

@@ -7,14 +7,14 @@ public class SimpleTest {
 
     @Test
     public void testCoarseGrainedListSet() {
-        CoarseGrainedListSet list = new CoarseGrainedListSet();
+        ListSet list = new CoarseGrainedListSet();
         makeThread(list);
         checkNode(0, 3000, list);
     }
 
     @Test
     public void testCoarseGrainedListSetRemoval() {
-        LockFreeListSet list = new LockFreeListSet();
+        ListSet list = new CoarseGrainedListSet();
         makeThread(list);
         makeThread_B(list);
         checkRemoval(list);
@@ -22,14 +22,14 @@ public class SimpleTest {
 
     @Test
     public void testFineGrainedListSet() {
-        FineGrainedListSet list = new FineGrainedListSet();
+        ListSet list = new FineGrainedListSet();
         makeThread(list);
         checkNode(0, 3000, list);
     }
 
     @Test
     public void testFineGrainedListSetRemoval() {
-        LockFreeListSet list = new LockFreeListSet();
+        ListSet list = new FineGrainedListSet();
         makeThread(list);
         makeThread_B(list);
         checkRemoval(list);
@@ -37,14 +37,14 @@ public class SimpleTest {
 
     @Test
     public void testLockFreeListSet() {
-        LockFreeListSet list = new LockFreeListSet();
+        ListSet list = new LockFreeListSet();
         makeThread(list);
         checkNode(0, 3000, list);
     }
 
     @Test
     public void testLockFreeListSetRemoval() {
-        LockFreeListSet list = new LockFreeListSet();
+        ListSet list = new LockFreeListSet();
         makeThread(list);
         makeThread_B(list);
         checkRemoval(list);
