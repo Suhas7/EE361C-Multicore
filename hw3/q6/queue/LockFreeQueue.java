@@ -8,10 +8,10 @@ public class LockFreeQueue implements MyQueue {
 	AtomicStampedReference<Node> Tail = new AtomicStampedReference<Node>(new Node(-1), 0);
 
 	public void LockFreeQueue() {
-		AtomicStampedReference<Node> node = new AtomicStampedReference<Node>(new Node(-1), 0);
-		node.getReference().next = null;
-		Head.getReference().next = node;
-		Tail.getReference().next = node;
+		//AtomicStampedReference<Node> node = new AtomicStampedReference<Node>(new Node(-1), 0);
+		//node.getReference().next = null;
+		Head.getReference().next = Tail;
+		Tail.getReference().next = null;
 	}
     public boolean enq(Integer value) {
         // implement your enq method here
@@ -64,10 +64,10 @@ public class LockFreeQueue implements MyQueue {
     }
 	public String toString() {
 		String out = "";
-		Node x = this.Head.getReference();
+		AtomicStampedReference<Node> x = this.Head;
 		while (x != null) {
-			out += ((Integer) x.value).toString();
-			x=x.next.getReference();
+			out += ((Integer) x.getReference().value).toString();
+			x = x.getReference().next;
 		}
 		return out;
 	}
