@@ -14,7 +14,7 @@ public class LockFreeListSet implements ListSet {
     	Node node = new Node(value);
     	Node prev = start;
     	Node curr = start.next.getReference();
-    	
+
         while(true) {
         	while(curr != end && curr.value < value) {
         		prev = curr;
