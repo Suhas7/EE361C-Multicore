@@ -1,13 +1,18 @@
 package queue;
 
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.atomic.AtomicStampedReference;
 
 public class LockFreeQueue implements MyQueue {
     // you are free to add members
-	AtomicStampedReference<Node> Head = new AtomicStampedReference<Node>(new Node(null), 0);
-	AtomicStampedReference<Node> Tail = new AtomicStampedReference<Node>(new Node(null), 0);
+	AtomicStampedReference<Node> Head = new AtomicStampedReference<Node>(new Node(-1), 0);
+	AtomicStampedReference<Node> Tail = new AtomicStampedReference<Node>(new Node(-1), 0);
 
+	public void LockFreeQueue() {
+		AtomicStampedReference<Node> node = new AtomicStampedReference<Node>(new Node(-1), 0);
+		node.getReference().next = null;
+		Head.getReference().next = node;
+		Tail.getReference().next = node;
+	}
     public boolean enq(Integer value) {
         // implement your enq method here
     	Node node = new Node(value);

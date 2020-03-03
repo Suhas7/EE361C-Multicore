@@ -20,8 +20,8 @@ public class StackTest {
 
     private void makeThread(LockFreeStack list) {
         Thread[] threads = new Thread[3];
-        threads[0] = new Thread(new MyThread(0, 5, list));
-        threads[1] = new Thread(new MyThread(0, 7, list));
+        threads[0] = new Thread(new MyThread(10, 50, list));
+        threads[1] = new Thread(new MyThread(60, 800, list));
         threads[2] = new Thread(new MyThread(4, 7, list));
         threads[1].start(); threads[0].start(); threads[2].start();
 
@@ -88,7 +88,7 @@ public class StackTest {
         public void run() {
             for (int i = 0; i < begin; ++i) {
                 try {
-                    System.out.println(list.pop());
+                    System.out.println(list.pop() + ",");
                 } catch (EmptyStack emptyStack) {
                     emptyStack.printStackTrace();
                 }
