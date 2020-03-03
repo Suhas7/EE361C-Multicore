@@ -57,7 +57,15 @@ public class LockFreeQueue implements MyQueue {
     	}
         return val;
     }
-
+	public String toString() {
+		String out = "";
+		Node x = this.Head.getReference();
+		while (x != null) {
+			out += ((Integer) x.value).toString();
+			x=x.next.getReference();
+		}
+		return out;
+	}
     protected class Node {
         public Integer value;
         public AtomicStampedReference<Node> next;

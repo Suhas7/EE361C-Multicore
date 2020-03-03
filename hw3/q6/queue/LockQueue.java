@@ -31,14 +31,23 @@ public class LockQueue implements MyQueue {
     public Integer deq() {
         // implement your deq method here
         dLock.lock();
+        while(this.count.get()==0);
         if(s.next==null) throw new EmptyStackException(); //todo wrong exception?
         int result = s.next.value;
-        s=s.next;
+        s = s.next;
         count.decrementAndGet();
         dLock.unlock();
         return result;
     }
-
+    public String toString() {
+        String out = "";
+        Node x = this.s.next;
+        while (x != null) {
+            out += ((Integer) x.value).toString();
+            x = x.next;
+        }
+        return out;
+    }
     protected class Node {
         public Integer value;
         public Node next;

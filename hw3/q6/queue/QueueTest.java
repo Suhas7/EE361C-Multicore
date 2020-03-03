@@ -1,24 +1,19 @@
-package stack;
+package queue;
 
-import org.junit.Assert;
 import org.junit.Test;
-import q5.CoarseGrainedListSet;
-import q5.FineGrainedListSet;
-import q5.ListSet;
-import q5.LockFreeListSet;
 
-public class StackTest {
+public class QueueTest {
 
     @Test
-    public void stackTest() {
-        LockFreeStack list = new LockFreeStack();
+    public void queueTest() {
+        MyQueue list = new LockFreeQueue();
         makeThread(list);
         checkNode(list);
         makeRemovingThread(list);
         checkNode(list);
     }
 
-    private void makeThread(LockFreeStack list) {
+    private void makeThread(MyQueue list) {
         Thread[] threads = new Thread[3];
         threads[0] = new Thread(new MyThread(0, 5, list));
         threads[1] = new Thread(new MyThread(0, 7, list));
@@ -33,7 +28,7 @@ public class StackTest {
             }
         }
     }
-    private void makeRemovingThread(LockFreeStack list) {
+    private void makeRemovingThread(MyQueue list) {
         Thread[] threads = new Thread[3];
         threads[0] = new Thread(new MyThread2(1, list));
         threads[1] = new Thread(new MyThread2(2, list));
@@ -49,7 +44,7 @@ public class StackTest {
         }
     }
 
-    private void checkNode(LockFreeStack list) {
+    private void checkNode(MyQueue list) {
         System.out.println(list.toString());
     }
 
@@ -57,9 +52,9 @@ public class StackTest {
 
         int begin;
         int end;
-        LockFreeStack list;
+        MyQueue list;
 
-        MyThread(int begin, int end, LockFreeStack list) {
+        MyThread(int begin, int end, MyQueue list) {
             this.begin = begin;
             this.end = end;
             this.list = list;
@@ -68,7 +63,7 @@ public class StackTest {
         @Override
         public void run() {
             for (int i = begin; i <= end; ++i) {
-                list.push(i);
+                list.enq(i);
             }
         }
     }
@@ -76,9 +71,9 @@ public class StackTest {
 
         int begin;
         int end;
-        LockFreeStack list;
+        MyQueue list;
 
-        MyThread2(int remove, LockFreeStack list) {
+        MyThread2(int remove, MyQueue list) {
             this.begin = remove;
             this.end = end;
             this.list = list;
@@ -88,8 +83,8 @@ public class StackTest {
         public void run() {
             for (int i = 0; i < begin; ++i) {
                 try {
-                    System.out.println(list.pop());
-                } catch (EmptyStack emptyStack) {
+                    System.out.println(list.deq());
+                } catch (Exception emptyStack) {
                     emptyStack.printStackTrace();
                 }
             }
