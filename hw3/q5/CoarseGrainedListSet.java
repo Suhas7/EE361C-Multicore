@@ -6,9 +6,9 @@ public class CoarseGrainedListSet implements ListSet {
     ReentrantLock RL = new ReentrantLock();
     Node s,t;
     public CoarseGrainedListSet() {
-        s = new Node(0);
+        s = new Node(Integer.MIN_VALUE);
         s.isTip=true;
-        t = new Node(0);
+        t = new Node(Integer.MAX_VALUE);
         t.isTip=true;
         s.next=t;
     }

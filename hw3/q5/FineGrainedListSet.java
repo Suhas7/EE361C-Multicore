@@ -4,9 +4,9 @@ import java.util.concurrent.locks.ReentrantLock;
 public class FineGrainedListSet implements ListSet {
     Node s,t;
     public FineGrainedListSet() {
-        s = new Node(0);
+        s = new Node(Integer.MIN_VALUE);
         s.isTip=true;
-        t = new Node(0);
+        t = new Node(Integer.MAX_VALUE);
         t.isTip=true;
         s.next=t;
     }

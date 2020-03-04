@@ -3,8 +3,8 @@ package q5;
 import java.util.concurrent.atomic.AtomicMarkableReference;
 
 public class LockFreeListSet implements ListSet {
-	Node start = new Node(-1);
-	Node end = new Node(-1);
+	Node start = new Node(Integer.MIN_VALUE);
+	Node end = new Node(Integer.MAX_VALUE);
 	
     public LockFreeListSet() {
     	start.next.set(end, false);
