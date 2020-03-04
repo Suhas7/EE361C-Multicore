@@ -17,9 +17,9 @@ public class QueueTest {
 
     private void makeThread(MyQueue list) {
         Thread[] threads = new Thread[3];
-        threads[0] = new Thread(new MyThread(0, 5, list));
-        threads[1] = new Thread(new MyThread(0, 7, list));
-        threads[2] = new Thread(new MyThread(4, 7, list));
+        threads[0] = new Thread(new MyThread(0, 9, list));
+        threads[1] = new Thread(new MyThread(0, 6, list));
+        threads[2] = new Thread(new MyThread(4, 8, list));
         threads[1].start(); threads[0].start(); threads[2].start();
 
         for (Thread thread : threads) {

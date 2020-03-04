@@ -36,6 +36,9 @@ public class FineGrainedListSet implements ListSet {
             curr=curr.next;
         }
         if(curr.next.value==value) {
+            curr.next.lock.lock();
+            curr.next.isDeleted=true;
+            curr.next.lock.unlock();
             curr.next=curr.next.next;
             curr.lock.unlock();
             return true;
@@ -66,11 +69,13 @@ public class FineGrainedListSet implements ListSet {
         public Node next;
         public ReentrantLock lock;
         public boolean isTip;
+        public boolean isDeleted;
         public Node(Integer x) {
             value = x;
             next = null;
             lock = new ReentrantLock();
             isTip = false;
+            isDeleted=false;
         }
     }
 
