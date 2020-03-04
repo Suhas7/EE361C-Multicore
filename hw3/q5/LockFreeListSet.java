@@ -20,15 +20,15 @@ public class LockFreeListSet implements ListSet {
         		prev = curr;
         		curr = curr.next.getReference();
         	}
-        	if(curr.value == value && !curr.next.isMarked()) {
+        	if(curr.value == value) {
         		return false;
         	}
         	node.next.set(curr, false);
         	if(prev.next.compareAndSet(curr, node, false, false)) {
-        		break;
+        		return true;
         	}
+        	
         }
-        return true;
     }
 
     public boolean remove(int value) {
