@@ -43,7 +43,7 @@ public class CoarseGrainedListSet implements ListSet {
 
     public boolean contains(int value) {
         // implement your contains method here
-        RL.lock(); //todo no need to lock bc read?
+        RL.lock();
         Node curr=s;
         while(s!=t){
             if(!curr.isTip && curr.value==value){RL.unlock();return true;}
