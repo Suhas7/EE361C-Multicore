@@ -20,7 +20,7 @@ public class LockFreeListSet implements ListSet {
         		prev = curr;
         		curr = curr.next.getReference();
         	}
-        	if(curr.value == value && curr != end) {
+        	if(curr.value == value && !curr.next.isMarked()) {
         		return false;
         	}
         	node.next.set(curr, false);
