@@ -12,10 +12,11 @@ public class LockFreeListSet implements ListSet {
 
     public boolean add(int value) {
     	Node node = new Node(value);
-    	Node prev = start;
-    	Node curr = start.next.getReference();
 
         while(true) {
+        	Node prev = start;
+        	Node curr = start.next.getReference();
+        	
         	while(curr != end && curr.value < value) {
         		prev = curr;
         		curr = curr.next.getReference();
@@ -34,9 +35,9 @@ public class LockFreeListSet implements ListSet {
     public boolean remove(int value) {
     	// when you delete a node, make its next equal to true
     	//if cur.next is right, then we delete it
-    	Node curr = start.next.getReference();
-    	Node prev = start;
         while(true) {
+        	Node curr = start.next.getReference();
+        	Node prev = start;
         	while(curr != end && curr.value < value) {
         		prev = curr;
         		curr = curr.next.getReference();
