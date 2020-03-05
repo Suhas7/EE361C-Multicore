@@ -12,12 +12,13 @@ public class FineGrainedListSet implements ListSet {
     }
 
     public boolean add(int value) {
-    	Node curr = s.next;
-        Node prev = s;
-        
-        prev.lock.lock();
-        curr.lock.lock();
         while(true) {
+        	Node curr = s.next;
+            Node prev = s;
+            
+            prev.lock.lock();
+            curr.lock.lock();
+            
 	        while(curr != t && curr.value < value){
 	        	prev.lock.unlock();
 	            prev = curr;
@@ -45,12 +46,13 @@ public class FineGrainedListSet implements ListSet {
     }
 
     public boolean remove(int value) {
-    	Node curr = s.next;
-        Node prev = s;
-        
-        prev.lock.lock();
-        curr.lock.lock();
         while(true) {
+        	Node curr = s.next;
+            Node prev = s;
+            
+            prev.lock.lock();
+            curr.lock.lock();
+            
 	        while(curr != t && curr.value < value){
 	        	prev.lock.unlock();
 	            prev = curr;

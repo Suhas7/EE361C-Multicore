@@ -65,10 +65,10 @@ public class LockFreeQueue implements MyQueue {
 		}
 		AtomicStampedReference<Node> x = this.Head.getReference().next;
 		while (x.getReference() != Tail.getReference()) {
-			out += ((Integer) x.getReference().value).toString() + " ";
+			out += ((Integer) x.getReference().value).toString() + ",";
 			x = x.getReference().next;
 		}
-		out += ((Integer) x.getReference().value).toString()+ " ";
+		out += ((Integer) x.getReference().value).toString()+ ",";
 		return out;
 	}
     protected class Node {

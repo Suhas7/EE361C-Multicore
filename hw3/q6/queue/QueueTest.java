@@ -6,7 +6,7 @@ public class QueueTest {
 
     @Test
     public void queueTest() {
-        MyQueue list = new LockFreeQueue();
+        MyQueue list = new LockQueue();
         makeThread(list);
         checkNode(list);
         makeRemovingThread(list);
@@ -30,7 +30,7 @@ public class QueueTest {
     }
     private void makeRemovingThread(MyQueue list) {
         Thread[] threads = new Thread[3];
-        threads[0] = new Thread(new MyThread2(1, list));
+        threads[0] = new Thread(new MyThread2(3, list));
         threads[1] = new Thread(new MyThread2(450, list));
         threads[2] = new Thread(new MyThread2(450, list));
         threads[1].start(); threads[0].start(); threads[2].start();

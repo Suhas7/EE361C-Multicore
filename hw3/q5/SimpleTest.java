@@ -90,7 +90,6 @@ public class SimpleTest {
         for (int i = start; i <= end; ++i) {
             sb.append(i).append(",");
         }
-        //System.out.println(list.toString());
         Assert.assertEquals(list.toString(), sb.toString());
     }
 

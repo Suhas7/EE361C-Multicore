@@ -35,11 +35,12 @@ public class LockFreeListSet implements ListSet {
         while(true) {
         	Node curr = start.next.getReference();
         	Node prev = start;
+        	
         	while(curr != end && curr.value < value) {
         		prev = curr;
         		curr = curr.next.getReference();
 	        }
-	        if(curr.value != value  || curr.next.isMarked()){
+	        if(curr.value != value || curr.next.isMarked()){
 	            return false;
 	        }
 	        else{

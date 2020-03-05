@@ -48,7 +48,7 @@ public class LockFreeStack implements MyStack {
         String out = "";
         Node x = this.top.get();
         while(x != null) {
-        	out+=((Integer) x.value).toString() + " ";
+        	out+=((Integer) x.value).toString() + ",";
         	x=x.next;
         }
         return out;
