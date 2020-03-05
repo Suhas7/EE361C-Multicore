@@ -41,7 +41,7 @@ public class LockFreeListSet implements ListSet {
         		prev = curr;
         		curr = curr.next.getReference();
 	        }
-	        if(curr.value != value){
+	        if(curr.value != value  || curr.next.isMarked()){
 	            return false;
 	        }
 	        else{
@@ -59,11 +59,13 @@ public class LockFreeListSet implements ListSet {
     	Node curr = start.next.getReference();
     	while(curr != end && curr.value < value) {
     		curr = curr.next.getReference();
-    		if(curr.value == value && !curr.next.isMarked()) {
-    			return true;
-    		}
-    	}
-    	return false;
+        }
+        if(curr.value != value || curr.next.isMarked()){
+            return false;
+        }
+        else{
+        	return true;
+        }
     }
 
     protected class Node {
