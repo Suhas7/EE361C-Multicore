@@ -15,7 +15,7 @@ public class StackTest {
 
     private void makeThread(LockFreeStack list) {
         Thread[] threads = new Thread[3];
-        threads[0] = new Thread(new MyThread(0, 50, list));
+        threads[0] = new Thread(new MyThread(3, 50, list));
         threads[1] = new Thread(new MyThread(0, 50, list));
         threads[2] = new Thread(new MyThread(0, 50, list));
         threads[1].start(); threads[0].start(); threads[2].start();
@@ -45,8 +45,7 @@ public class StackTest {
     }
 
     private void checkNode(LockFreeStack list) {
-        System.out.println("Final string: " + list.toString());
-        //System.out.println("Strlen" + list.toString().length());
+        System.out.println("Final string: " + list.toStringTest());
     }
 
     private class MyThread implements Runnable {

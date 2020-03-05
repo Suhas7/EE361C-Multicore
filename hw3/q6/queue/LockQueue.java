@@ -34,7 +34,7 @@ public class LockQueue implements MyQueue {
         return result;
     }
     
-    public String toString() {
+    public String toStringTest() {
         String out = "";
         Node x = this.s.next;
         while (x != null) {

@@ -8,9 +8,9 @@ public class QueueTest {
     public void queueTest() {
         MyQueue list = new LockQueue();
         makeThread(list);
-        checkNode(list);
+        checkNode((LockQueue) list);
         makeRemovingThread(list);
-        checkNode(list);
+        checkNode((LockQueue) list);
     }
 
     private void makeThread(MyQueue list) {
@@ -30,7 +30,7 @@ public class QueueTest {
     }
     private void makeRemovingThread(MyQueue list) {
         Thread[] threads = new Thread[3];
-        threads[0] = new Thread(new MyThread2(3, list));
+        threads[0] = new Thread(new MyThread2(0, list));
         threads[1] = new Thread(new MyThread2(450, list));
         threads[2] = new Thread(new MyThread2(450, list));
         threads[1].start(); threads[0].start(); threads[2].start();
@@ -44,8 +44,8 @@ public class QueueTest {
         }
     }
 
-    private void checkNode(MyQueue list) {
-        System.out.println("Final List: " + list.toString());
+    private void checkNode(LockQueue list) {
+        System.out.println("Final List: " + list.toStringTest());
     }
 
     private class MyThread implements Runnable {

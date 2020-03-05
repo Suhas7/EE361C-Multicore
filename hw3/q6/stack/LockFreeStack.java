@@ -43,8 +43,7 @@ public class LockFreeStack implements MyStack {
         }
     }
 
-    @Override
-    public String toString() {
+    public String toStringTest() {
         String out = "";
         Node x = this.top.get();
         while(x != null) {

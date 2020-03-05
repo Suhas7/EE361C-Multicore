@@ -58,7 +58,7 @@ public class LockFreeQueue implements MyQueue {
 	    	}
     	}
     }
-	public String toString() {
+	public String toStringTest() {
 		String out = "";
 		if(Head.getReference().next.getReference() == null) {
 			return out;
