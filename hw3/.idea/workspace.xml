@@ -2,30 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c37250b5-e27b-4353-93a9-7ed7b7109c91" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/hw3.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/q5/CoarseGrainedListSet$Node.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/q5/CoarseGrainedListSet.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/q5/FineGrainedListSet$Node.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/q5/FineGrainedListSet.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/q5/ListSet.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/q5/LockFreeListSet$Node.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/q5/LockFreeListSet.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/q5/SimpleTest$MyThread.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/q5/SimpleTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/queue/LockFreeQueue$Node.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/queue/LockFreeQueue.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/queue/LockQueue$Node.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/queue/LockQueue.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/queue/MyQueue.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/stack/EmptyStack.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/stack/LockFreeStack$Node.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/stack/LockFreeStack.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/hw3/stack/MyStack.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/hw3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hw3/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/hw3/q5/CoarseGrainedListSet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hw3/q5/CoarseGrainedListSet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/hw3/q5/FineGrainedListSet$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hw3/q5/FineGrainedListSet$Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/hw3/q5/FineGrainedListSet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hw3/q5/FineGrainedListSet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/hw3/q5/LockFreeListSet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hw3/q5/LockFreeListSet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/hw3/q5/SimpleTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hw3/q5/SimpleTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q5/FineGrainedListSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/q5/FineGrainedListSet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q5/LockFreeListSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/q5/LockFreeListSet.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,35 +23,35 @@
     <session id="201554948">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.0" value="1" />
-          <entry key="project.open.time.11" value="1" />
+          <entry key="project.open.time.11" value="2" />
           <entry key="project.open.time.12" value="1" />
-          <entry key="project.open.time.7" value="1" />
-          <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.open.time.7" value="2" />
+          <entry key="project.open.time.8" value="2" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="27" />
+          <entry key="java" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="27" />
+          <entry key="JAVA" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="3118" />
-          <entry key="txt" value="196" />
+          <entry key="java" value="3376" />
+          <entry key="txt" value="213" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="3118" />
-          <entry key="PLAIN_TEXT" value="196" />
+          <entry key="JAVA" value="3376" />
+          <entry key="PLAIN_TEXT" value="213" />
         </counts>
       </usages-collector>
     </session>
@@ -74,18 +59,9 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/q5/SimpleTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="38" column="16" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/q5/CoarseGrainedListSet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="466">
+            <state relative-caret-position="510">
               <caret line="45" column="18" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="18" />
             </state>
           </provider>
@@ -94,8 +70,26 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/q5/FineGrainedListSet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="43" column="24" lean-forward="true" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
+            <state relative-caret-position="221">
+              <caret line="42" column="16" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/q5/SimpleTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="129" selection-start-line="129" selection-end-line="129" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/q5/LockFreeListSet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -103,8 +97,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/q6/queue/QueueTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="28" column="36" lean-forward="true" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
+            <state relative-caret-position="476">
+              <caret line="28" column="36" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -118,6 +112,7 @@
       <find>x.nex</find>
       <find>toString</find>
       <find>toStr</find>
+      <find>isTip</find>
     </findStrings>
     <replaceStrings>
       <replace>MyQueue</replace>
@@ -135,17 +130,16 @@
         <option value="$PROJECT_DIR$/q6/queue/LockFreeQueue.java" />
         <option value="$PROJECT_DIR$/q5/SimpleTest.java" />
         <option value="$PROJECT_DIR$/q5/CoarseGrainedListSet.java" />
-        <option value="$PROJECT_DIR$/q5/LockFreeListSet.java" />
         <option value="$PROJECT_DIR$/q6/queue/QueueTest.java" />
+        <option value="$PROJECT_DIR$/q5/LockFreeListSet.java" />
         <option value="$PROJECT_DIR$/q5/FineGrainedListSet.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="228" />
-    <option name="y" value="-12" />
-    <option name="width" value="1526" />
-    <option name="height" value="2026" />
+    <option name="x" value="1490" />
+    <option name="width" value="1522" />
+    <option name="height" value="2012" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="false" id="Update" />
@@ -155,7 +149,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -195,6 +188,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -208,119 +202,6 @@
       <recent name="stack" />
     </key>
   </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/q5/CoarseGrainedListSet.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/q5/FineGrainedListSet.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/q5/LockFreeListSet.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/q5/SimpleTest.java</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
-  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -333,22 +214,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.QueueTest">
-    <configuration name="QueueTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="hw3" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="queue.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="queue" />
-      <option name="MAIN_CLASS_NAME" value="queue.QueueTest" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SimpleTest.testFineGrainedListSet" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.SimpleTest.testFineGrainedListSetRemoval">
+    <configuration name="SimpleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="hw3" />
       <extension name="coverage">
         <pattern>
@@ -358,7 +225,21 @@
       </extension>
       <option name="PACKAGE_NAME" value="q5" />
       <option name="MAIN_CLASS_NAME" value="q5.SimpleTest" />
-      <option name="METHOD_NAME" value="testFineGrainedListSet" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SimpleTest.testCoarseGrainedListSetRemoval" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hw3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="q5.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="q5" />
+      <option name="MAIN_CLASS_NAME" value="q5.SimpleTest" />
+      <option name="METHOD_NAME" value="testCoarseGrainedListSetRemoval" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -413,19 +294,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.SimpleTest.testFineGrainedListSet" />
-      <item itemvalue="JUnit.SimpleTest.testFineGrainedListSetRemoval" />
       <item itemvalue="JUnit.SimpleTest.testLockFreeListSet" />
       <item itemvalue="JUnit.SimpleTest.testLockFreeListSetRemoval" />
-      <item itemvalue="JUnit.QueueTest" />
+      <item itemvalue="JUnit.SimpleTest" />
+      <item itemvalue="JUnit.SimpleTest.testCoarseGrainedListSetRemoval" />
+      <item itemvalue="JUnit.SimpleTest.testFineGrainedListSetRemoval" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.QueueTest" />
-        <item itemvalue="JUnit.SimpleTest.testLockFreeListSet" />
-        <item itemvalue="JUnit.SimpleTest.testLockFreeListSetRemoval" />
         <item itemvalue="JUnit.SimpleTest.testFineGrainedListSetRemoval" />
-        <item itemvalue="JUnit.SimpleTest.testFineGrainedListSet" />
+        <item itemvalue="JUnit.SimpleTest" />
+        <item itemvalue="JUnit.SimpleTest.testCoarseGrainedListSetRemoval" />
+        <item itemvalue="JUnit.SimpleTest.testLockFreeListSetRemoval" />
+        <item itemvalue="JUnit.SimpleTest.testLockFreeListSet" />
       </list>
     </recent_temporary>
   </component>
@@ -510,59 +391,66 @@
       <option name="project" value="LOCAL" />
       <updated>1583344824188</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="removed isDeleted">
+      <created>1583345022177</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1583345022177</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="SimpleTest_testLockFreeListSet - 2020.03.03 at 14h 49m 11s.xml">
-      <configuration name="SimpleTest.testLockFreeListSet" configurationId="JUnit" />
+    <history-entry file="SimpleTest - 2020.03.04 at 18h 43m 55s.xml">
+      <configuration name="SimpleTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SimpleTest_testLockFreeListSet - 2020.03.03 at 14h 49m 14s.xml">
-      <configuration name="SimpleTest.testLockFreeListSet" configurationId="JUnit" />
+    <history-entry file="SimpleTest - 2020.03.04 at 18h 43m 58s.xml">
+      <configuration name="SimpleTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SimpleTest_testLockFreeListSet - 2020.03.03 at 15h 10m 33s.xml">
-      <configuration name="SimpleTest.testLockFreeListSet" configurationId="JUnit" />
+    <history-entry file="SimpleTest - 2020.03.04 at 18h 44m 01s.xml">
+      <configuration name="SimpleTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="QueueTest - 2020.03.03 at 18h 12m 06s.xml">
-      <configuration name="QueueTest" configurationId="JUnit" />
+    <history-entry file="SimpleTest - 2020.03.04 at 18h 44m 04s.xml">
+      <configuration name="SimpleTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="QueueTest - 2020.03.03 at 18h 12m 18s.xml">
-      <configuration name="QueueTest" configurationId="JUnit" />
+    <history-entry file="SimpleTest - 2020.03.04 at 18h 44m 07s.xml">
+      <configuration name="SimpleTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="QueueTest - 2020.03.03 at 18h 12m 29s.xml">
-      <configuration name="QueueTest" configurationId="JUnit" />
+    <history-entry file="SimpleTest_testFineGrainedListSetRemoval - 2020.03.04 at 18h 44m 13s.xml">
+      <configuration name="SimpleTest.testFineGrainedListSetRemoval" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="QueueTest - 2020.03.03 at 18h 12m 34s.xml">
-      <configuration name="QueueTest" configurationId="JUnit" />
+    <history-entry file="SimpleTest_testFineGrainedListSetRemoval - 2020.03.04 at 18h 44m 15s.xml">
+      <configuration name="SimpleTest.testFineGrainedListSetRemoval" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="QueueTest - 2020.03.03 at 18h 12m 39s.xml">
-      <configuration name="QueueTest" configurationId="JUnit" />
+    <history-entry file="SimpleTest_testFineGrainedListSetRemoval - 2020.03.04 at 18h 44m 18s.xml">
+      <configuration name="SimpleTest.testFineGrainedListSetRemoval" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="QueueTest - 2020.03.03 at 18h 13m 27s.xml">
-      <configuration name="QueueTest" configurationId="JUnit" />
+    <history-entry file="SimpleTest_testFineGrainedListSetRemoval - 2020.03.04 at 18h 51m 35s.xml">
+      <configuration name="SimpleTest.testFineGrainedListSetRemoval" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="QueueTest - 2020.03.03 at 18h 13m 36s.xml">
-      <configuration name="QueueTest" configurationId="JUnit" />
+    <history-entry file="SimpleTest_testFineGrainedListSetRemoval - 2020.03.04 at 18h 56m 23s.xml">
+      <configuration name="SimpleTest.testFineGrainedListSetRemoval" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1513" height="1013" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30309278" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1250859" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49965635" weight="0.32879817" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49965635" visible="true" weight="0.32879817" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3265306" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32993197" />
       <window_info anchor="bottom" id="Statistic" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32914287" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5003436" side_tool="true" weight="0.32879817" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32993197" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -571,29 +459,6 @@
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info anchor="right" id="Maven Projects" order="4" />
     </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3035461" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Designer" order="2" />
-      <window_info id="Favorites" order="3" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32879817" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.3265306" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32993197" />
-      <window_info anchor="bottom" id="Statistic" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32993197" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24948454" />
-      <window_info anchor="right" id="Palette&#9;" order="3" />
-      <window_info anchor="right" id="Maven Projects" order="4" />
-    </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -609,7 +474,8 @@
     <MESSAGE value="testing added" />
     <MESSAGE value="refactored q5 tests" />
     <MESSAGE value="added code for isDeleted on finegrained" />
-    <option name="LAST_COMMIT_MESSAGE" value="added code for isDeleted on finegrained" />
+    <MESSAGE value="removed isDeleted" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed isDeleted" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -625,12 +491,6 @@
           <line>13</line>
           <properties />
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/q5/LockFreeListSet.java</url>
-          <line>26</line>
-          <properties />
-          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -713,38 +573,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/q6/queue/QueueTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="36" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q5/LockFreeListSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/q5/CoarseGrainedListSet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
+        <state relative-caret-position="510">
           <caret line="45" column="18" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/q5/SimpleTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="38" column="16" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q5/LockFreeListSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="17" column="21" lean-forward="true" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q6/queue/QueueTest.java">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
-          <caret line="28" column="36" lean-forward="true" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
+          <caret line="129" selection-start-line="129" selection-end-line="129" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/util/concurrent/locks/ReentrantLock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="150" selection-start-line="150" selection-end-line="150" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/util/concurrent/locks/AbstractQueuedSynchronizer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="1260" selection-start-line="1260" selection-end-line="1260" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/q5/FineGrainedListSet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="43" column="24" lean-forward="true" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
+        <state relative-caret-position="221">
+          <caret line="42" column="16" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
         </state>
       </provider>
     </entry>

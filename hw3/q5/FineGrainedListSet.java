@@ -32,20 +32,24 @@ public class FineGrainedListSet implements ListSet {
     }
 
     public boolean remove(int value) {
-        s.lock.lock();
         Node curr=s;
-        
-        while(curr != t && curr.next.value < value){
-            curr.next.lock.lock();
-            curr.lock.unlock(); //this line occasionally causes illegal state exception
+        curr.lock.lock();
+        curr.next.lock.lock();
+        Node last;
+        while(curr.next != null && curr.next.value < value){
+            curr.next.next.lock.lock();
+            last=curr;
             curr=curr.next;
+            last.lock.unlock(); //this line occasionally causes illegal state exception
         }
         if(curr.next.value==value && curr != t) {
+            curr.next.lock.unlock();
             curr.next=curr.next.next;
             curr.lock.unlock();
             return true;
         } 
         else {
+            curr.next.lock.unlock();
             curr.lock.unlock();
             return false;
         }
