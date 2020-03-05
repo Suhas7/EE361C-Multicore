@@ -56,24 +56,26 @@ public class FineGrainedListSet implements ListSet {
     }
 
     public boolean contains(int value) {
-        Node curr=s.next;
+    	Node curr=s;
         curr.lock.lock();
-        
-        while(s!=t){
-            if(curr != t && curr.value==value){
-                curr.lock.unlock();
-                return true;
-            }
-            curr.next.lock.lock();
-            curr.lock.unlock();
+        curr.next.lock.lock();
+        Node last;
+        while(curr.next != null && curr.next.value < value){
+            curr.next.next.lock.lock();
+            last=curr;
             curr=curr.next;
+            last.lock.unlock(); //this line occasionally causes illegal state exception
         }
-        
-        if(t.lock.getHoldCount() > 0) {
-        	t.lock.unlock();
+        if(curr.next.value==value && curr != t) {
+            curr.next.lock.unlock();
+            curr.lock.unlock();
+            return true;
+        } 
+        else {
+            curr.next.lock.unlock();
+            curr.lock.unlock();
+            return false;
         }
-        
-        return false;
     }
 
     protected class Node {

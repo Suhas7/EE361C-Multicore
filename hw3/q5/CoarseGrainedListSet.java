@@ -15,7 +15,6 @@ public class CoarseGrainedListSet implements ListSet {
 
     public boolean add(int value) {
         RL.lock();
-        //System.out.println(x.incrementAndGet());
         Node curr=s;
         while(!curr.next.isTip && curr.next.value<value){curr=curr.next;}
         if(curr.next.value==value) {RL.unlock();return false;}
@@ -29,7 +28,9 @@ public class CoarseGrainedListSet implements ListSet {
     public boolean remove(int value) {
         RL.lock();
         Node curr=s;
-        while(!curr.next.isTip && curr.next.value<value)curr=curr.next;
+        while(!curr.next.isTip && curr.next.value < value) {
+        	curr=curr.next;
+        }
         if(curr.next.isTip || curr.next.value!=value){
             RL.unlock();
             return false;
@@ -43,14 +44,19 @@ public class CoarseGrainedListSet implements ListSet {
 
     public boolean contains(int value) {
         // implement your contains method here
-        RL.lock();
+    	RL.lock();
         Node curr=s;
-        while(s!=t){
-            if(!curr.isTip && curr.value==value){RL.unlock();return true;}
-            curr=curr.next;
+        while(!curr.next.isTip && curr.next.value < value) {
+        	curr=curr.next;
         }
-        RL.unlock();
-        return false;
+        if(curr.next.isTip || curr.next.value!=value){
+            RL.unlock();
+            return false;
+        }
+        else{
+            RL.unlock();
+            return true;
+        }
     }
 
     protected class Node {

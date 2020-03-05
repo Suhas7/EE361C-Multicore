@@ -129,6 +129,7 @@ public class SimpleTest {
         public void run() {
             for (int i = end; i >= begin; --i) {
                 list.remove(i);
+                Assert.assertFalse(list.contains(i));
             }
         }
         

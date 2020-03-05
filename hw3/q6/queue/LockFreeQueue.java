@@ -52,20 +52,23 @@ public class LockFreeQueue implements MyQueue {
 	    		else {
 	    			val = next.getReference().value;
 	    			if (this.Head.compareAndSet(head.getReference(), next.getReference(), head.getStamp(), head.getStamp()+1)) {
-	    				break;
+	    				return val;
 	    			}
 	    		}
 	    	}
     	}
-        return val;
     }
 	public String toString() {
 		String out = "";
+		if(Head.getReference().next.getReference() == null) {
+			return out;
+		}
 		AtomicStampedReference<Node> x = this.Head.getReference().next;
 		while (x.getReference() != Tail.getReference()) {
-			out += ((Integer) x.getReference().value).toString();
+			out += ((Integer) x.getReference().value).toString() + " ";
 			x = x.getReference().next;
 		}
+		out += ((Integer) x.getReference().value).toString()+ " ";
 		return out;
 	}
     protected class Node {
