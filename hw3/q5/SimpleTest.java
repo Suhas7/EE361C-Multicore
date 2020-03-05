@@ -110,6 +110,7 @@ public class SimpleTest {
         public void run() {
             for (int i = begin; i <= end; ++i) {
                 list.add(i);
+                Assert.assertTrue(list.contains(i));
             }
         }
     }

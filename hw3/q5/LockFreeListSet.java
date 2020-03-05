@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicMarkableReference;
 public class LockFreeListSet implements ListSet {
 	Node start = new Node(Integer.MIN_VALUE);
 	Node end = new Node(Integer.MAX_VALUE);
-	
+
     public LockFreeListSet() {
     	start.next.set(end, false);
     }
@@ -16,7 +16,7 @@ public class LockFreeListSet implements ListSet {
         while(true) {
         	Node prev = start;
         	Node curr = start.next.getReference();
-        	
+
         	while(curr != end && curr.value < value) {
         		prev = curr;
         		curr = curr.next.getReference();
@@ -28,7 +28,6 @@ public class LockFreeListSet implements ListSet {
         	if(prev.next.compareAndSet(curr, node, false, false)) {
         		return true;
         	}
-        	
         }
     }
 
