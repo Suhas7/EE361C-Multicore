@@ -1,6 +1,5 @@
 package stack;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 public class StackTest {
@@ -16,7 +15,7 @@ public class StackTest {
 
     private void makeThread(LockFreeStack list) {
         Thread[] threads = new Thread[3];
-        threads[0] = new Thread(new MyThread(0, 50, list));
+        threads[0] = new Thread(new MyThread(-1, 50, list));
         threads[1] = new Thread(new MyThread(0, 50, list));
         threads[2] = new Thread(new MyThread(0, 50, list));
         threads[1].start(); threads[0].start(); threads[2].start();
@@ -31,7 +30,7 @@ public class StackTest {
     }
     private void makeRemovingThread(LockFreeStack list) {
         Thread[] threads = new Thread[3];
-        threads[0] = new Thread(new MyThread2(55, list));
+        threads[0] = new Thread(new MyThread2(53, list));
         threads[1] = new Thread(new MyThread2(50, list));
         threads[2] = new Thread(new MyThread2(50, list));
         threads[1].start(); threads[0].start(); threads[2].start();

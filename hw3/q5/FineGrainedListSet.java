@@ -4,6 +4,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class FineGrainedListSet implements ListSet {
     Node s;
     Node t;
+    
     public FineGrainedListSet() {
         s = new Node(Integer.MIN_VALUE);
         t = new Node(Integer.MAX_VALUE);
@@ -11,82 +12,108 @@ public class FineGrainedListSet implements ListSet {
     }
 
     public boolean add(int value) {
-        s.lock.lock();
-        Node curr=s;
+    	Node curr = s.next;
+        Node prev = s;
         
-        while(curr != t && curr.next.value < value){
-            curr.next.lock.lock();
-            curr.lock.unlock();
-            curr=curr.next;
+        prev.lock.lock();
+        curr.lock.lock();
+        while(true) {
+	        while(curr != t && curr.value < value){
+	        	prev.lock.unlock();
+	            prev = curr;
+	            curr = curr.next;
+	            curr.lock.lock();
+	        }
+	        if(curr.value == value) {
+	        	prev.lock.unlock();
+	        	curr.lock.unlock();
+	        	return false;
+	        }
+	        if(!(curr.isDeleted || prev.isDeleted || prev.next != curr)) {
+		        Node node = new Node(value);
+		        node.next = curr;
+		        prev.next = node;
+		        prev.lock.unlock();
+		        curr.lock.unlock();
+		        return true;
+	        }
+	        else {
+	        	prev.lock.unlock();
+	        	curr.lock.unlock();
+	        }
         }
-        if(curr.next.value==value) {
-        	curr.lock.unlock();
-        	return false;
-        }
-        
-        Node newN = new Node(value);
-        newN.next=curr.next;
-        curr.next=newN;
-        curr.lock.unlock();
-        return true;
     }
 
     public boolean remove(int value) {
-        Node curr=s;
+    	Node curr = s.next;
+        Node prev = s;
+        
+        prev.lock.lock();
         curr.lock.lock();
-        curr.next.lock.lock();
-        Node last;
-        while(curr.next != null && curr.next.value < value){
-            curr.next.next.lock.lock();
-            last=curr;
-            curr=curr.next;
-            last.lock.unlock(); //this line occasionally causes illegal state exception
-        }
-        if(curr.next.value==value && curr != t) {
-            curr.next.lock.unlock();
-            curr.next=curr.next.next;
-            curr.lock.unlock();
-            return true;
-        } 
-        else {
-            curr.next.lock.unlock();
-            curr.lock.unlock();
-            return false;
+        while(true) {
+	        while(curr != t && curr.value < value){
+	        	prev.lock.unlock();
+	            prev = curr;
+	            curr = curr.next;
+	            curr.lock.lock();
+	        }
+	        if(curr.value == value ) {
+	        	if(!(curr.isDeleted || prev.isDeleted || prev.next != curr)) {
+		        	curr.isDeleted = true;
+		        	prev.next = curr.next;
+		        	prev.lock.unlock();
+		        	curr.lock.unlock();
+		        	return true;
+	        	}
+	        	else {
+	        		prev.lock.unlock();
+		        	curr.lock.unlock();
+	        	}
+	        }
+	        else {
+	        	prev.lock.unlock();
+	        	curr.lock.unlock();
+	        	return false;
+	        }
         }
     }
 
     public boolean contains(int value) {
-    	Node curr=s;
+    	Node curr = s.next;
+        Node prev = s;
+        
+        prev.lock.lock();
         curr.lock.lock();
-        curr.next.lock.lock();
-        Node last;
-        while(curr.next != null && curr.next.value < value){
-            curr.next.next.lock.lock();
-            last=curr;
-            curr=curr.next;
-            last.lock.unlock(); //this line occasionally causes illegal state exception
+        while(curr != t && curr.value < value){
+        	prev.lock.unlock();
+            prev = curr;
+            curr = curr.next;
+            curr.lock.lock();
         }
-        if(curr.next.value==value && curr != t) {
-            curr.next.lock.unlock();
-            curr.lock.unlock();
-            return true;
-        } 
+        if(curr.value == value && !(curr.isDeleted || prev.isDeleted || prev.next != curr)) {
+        	prev.lock.unlock();
+        	curr.lock.unlock();
+        	return true;
+        }
         else {
-            curr.next.lock.unlock();
-            curr.lock.unlock();
-            return false;
+        	prev.lock.unlock();
+        	curr.lock.unlock();
+        	return false;
         }
+        
     }
 
     protected class Node {
         public Integer value;
         public Node next;
         public ReentrantLock lock;
+        Boolean isDeleted;
         
         public Node(Integer x) {
             value = x;
             next = null;
             lock = new ReentrantLock();
+            isDeleted = false;
         }
     }
 

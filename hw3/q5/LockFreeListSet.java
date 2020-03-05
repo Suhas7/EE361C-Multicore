@@ -32,8 +32,6 @@ public class LockFreeListSet implements ListSet {
     }
 
     public boolean remove(int value) {
-    	// when you delete a node, make its next equal to true
-    	//if cur.next is right, then we delete it
         while(true) {
         	Node curr = start.next.getReference();
         	Node prev = start;

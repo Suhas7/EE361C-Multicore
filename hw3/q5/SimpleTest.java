@@ -9,7 +9,7 @@ public class SimpleTest {
     public void testCoarseGrainedListSet() {
         ListSet list = new CoarseGrainedListSet();
         makeThread(list);
-        checkNode(0, 3000, list);
+        checkNode(0, 4000, list);
     }
 
     @Test
@@ -24,7 +24,7 @@ public class SimpleTest {
     public void testFineGrainedListSet() {
         ListSet list = new FineGrainedListSet();
         makeThread(list);
-        checkNode(0, 3000, list);
+        checkNode(0, 4000, list);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class SimpleTest {
     public void testLockFreeListSet() {
         ListSet list = new LockFreeListSet();
         makeThread(list);
-        checkNode(0, 3000, list);
+        checkNode(0, 4000, list);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class SimpleTest {
 
     private void makeThread_B(ListSet list) {
         Thread[] threads = new Thread[3];
-        threads[0] = new Thread(new Thread_B(0, 1000, list));
+        threads[0] = new Thread(new Thread_B(0, 4000, list));
         threads[1] = new Thread(new Thread_B(1001, 2000, list));
         threads[2] = new Thread(new Thread_B(2001, 3000, list));
         threads[1].start(); threads[0].start(); threads[2].start();
@@ -73,7 +73,7 @@ public class SimpleTest {
         Thread[] threads = new Thread[3];
         threads[0] = new Thread(new MyThread(0, 2000, list));
         threads[1] = new Thread(new MyThread(0, 3000, list));
-        threads[2] = new Thread(new MyThread(0, 3000, list));
+        threads[2] = new Thread(new MyThread(3000, 4000, list));
         threads[1].start(); threads[0].start(); threads[2].start();
 
         for (Thread thread : threads) {
@@ -90,7 +90,7 @@ public class SimpleTest {
         for (int i = start; i <= end; ++i) {
             sb.append(i).append(",");
         }
-        System.out.println(list.toString());
+        //System.out.println(list.toString());
         Assert.assertEquals(list.toString(), sb.toString());
     }
 
