@@ -30,28 +30,27 @@ int main(int argc,char **argv){
         numLen++;
         token=strtok(NULL,",");
     }
-
     //transmit to GPU
     printf("started gpu sect\n");
     int* cudaInp;
-    int* inpLen;
-    int* resArr;
-    int* resLen;
-    int* resLenHost;
     cudaMalloc((void**)&cudaInp,numLen*sizeof(int));
+    int* inpLen;
     cudaMalloc((void**)&inpLen,sizeof(int));
+    cudaMemcpy(cudaInp, inp, numLen*sizeof(int), cudaMemcpyHostToDevice);
+    int* resArr;
     cudaMalloc((void**)&resArr,numLen*sizeof(int));
+    int* resLen;
     cudaMalloc((void**)&resLen,sizeof(int));
-    cudaMemcpy(cudaInp, &inp, numLen*sizeof(int), cudaMemcpyHostToDevice);
     cudaMemcpy(inpLen,&numLen,sizeof(int),cudaMemcpyHostToDevice);
-
+    
     //run kernel
     kern<<<NUM_BLOCKS, BLOCK_WIDTH>>>(cudaInp,inpLen,resArr, resLen);
     cudaDeviceSynchronize();
+    int resLenHost;
+    cudaMemcpy(&resLenHost,resLen,sizeof(int),cudaMemcpyDeviceToHost);
+    printf("%i\n",resLenHost);
     cudaMemcpy(inp, resArr, numLen*sizeof(int), cudaMemcpyDeviceToHost);
-    cudaMemcpy(resLenHost,resLen,sizeof(int),cudaMemcpyDeviceToHost);
-    printf("%d\n",*resLenHost);
-    for(int j=0; j<*resLenHost;j++){
+    for(int j=0; j<resLenHost;j++){
         printf("%d\n",inp[j]);
     }
     cudaFree(cudaInp);
