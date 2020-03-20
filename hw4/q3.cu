@@ -3,31 +3,21 @@
 #define NUM_BLOCKS 1
 #define BLOCK_WIDTH 1
 
-__global__ void kern(int* inp, int* inpLen, int* res, int* resLen){
-    int j=0;
-    for(int i = 0; i<*inpLen; i++){
-        if(inp[i]%2==1){
-            res[j]=inp[i];
-            j++;
-        }
+//todo this needs parallelization
+__global__ void prefixSum(int* inp, int inpLen, int* res, int* resLen){
+    int runningTotal=0;
+    for(int i = 0; i<inpLen; i++){
+        if(inp[i]%2==1) runningTotal++;
+        res[i]=runningTotal;
     }
-    *resLen=j;
+    *resLen=runningTotal;
 }
 
-__global__ void prefixSum(int* inp, int inpLen, int* res, int* resLen){
-    int j=0;
-    for(int i = 0; i<inpLen; i++){
-        if(inp[i]%2==1){
-            res[j]=inp[i];
-            j++;
-        }
-    }
-    *resLen=j;
-}
 __global__ void copyInt(int* dest, int* source){
     *dest=*source;
 }
-__global__ void copyOdds(int* inp, int* prefix, int* inpLen, int* out){
+
+__global__ void copyOdds(int* inp, int* prefix, int inpLen, int* out){
     if(prefix[0]==1) out[0]=inp[0];
     //todo parallelize this loop
     for(int i=1; i<inpLen; i++){
@@ -37,12 +27,13 @@ __global__ void copyOdds(int* inp, int* prefix, int* inpLen, int* out){
 
 __global__ void driver(int* cudaInp,int* inpLen,int** resArr, int* resLen){
     int* prefix;
-    cudaMalloc((void**)&prefix,inpLen*sizeof(int));
+    cudaMalloc((void**)&prefix,(*inpLen)*sizeof(int));
     //compute prefixSum
-    prefixSum(inp, *inpLen, prefix, resLen);
+    prefixSum(cudaInp, *inpLen, prefix, resLen);
     //allocate output array
-    cudaMalloc(*resArr, (*resLen)*sizeof(int));
-    copyOdds(inp, prefix, inpLen, *resArr);
+    cudaMalloc(resArr, (*resLen)*sizeof(int));
+    //postprocess to make an array of odds
+    copyOdds(cudaInp, prefix, *inpLen, *resArr);
     cudaFree(prefix);
 }
 
@@ -74,7 +65,7 @@ int main(int argc,char **argv){
     int** resArr;
     
     //run kernel
-    kern<<<NUM_BLOCKS, BLOCK_WIDTH>>>(cudaInp,inpLen,resArr, resLen);
+    driver<<<NUM_BLOCKS, BLOCK_WIDTH>>>(cudaInp,inpLen,resArr, resLen);
     cudaDeviceSynchronize();
     
     //recover data
