@@ -3,17 +3,39 @@
 #define NUM_BLOCKS 1
 #define BLOCK_WIDTH 1
 
-__global__ void kern(int* inp, int* inpLen, int* res, int* resLen){
-    int j=0;
-    for(int i = 0; i<*inpLen; i++){
-        if(inp[i]%2==1){
-            res[j]=inp[i];
-            j++;
-        }
+//todo this needs parallelization
+__global__ void prefixSum(int* inp, int inpLen, int* res, int* resLen){
+    int runningTotal=0;
+    for(int i = 0; i<inpLen; i++){
+        if(inp[i]%2==1) runningTotal++;
+        res[i]=runningTotal;
     }
-    *resLen=j;
+    *resLen=runningTotal;
 }
 
+__global__ void copyInt(int* dest, int* source){
+    *dest=*source;
+}
+
+__global__ void copyOdds(int* inp, int* prefix, int inpLen, int* out){
+    if(prefix[0]==1) out[0]=inp[0];
+    //todo parallelize this loop
+    for(int i=1; i<inpLen; i++){
+        if(prefix[i]!=prefix[i-1]) out[prefix[i]-1]=inp[i];
+    }
+}
+
+__global__ void driver(int* cudaInp,int* inpLen,int** resArr, int* resLen){
+    int* prefix;
+    cudaMalloc((void**)&prefix,(*inpLen)*sizeof(int));
+    //compute prefixSum
+    prefixSum(cudaInp, *inpLen, prefix, resLen);
+    //allocate output array
+    cudaMalloc(resArr, (*resLen)*sizeof(int));
+    //postprocess to make an array of odds
+    copyOdds(cudaInp, prefix, *inpLen, *resArr);
+    cudaFree(prefix);
+}
 
 int main(int argc,char **argv){
     //read array in
@@ -30,29 +52,33 @@ int main(int argc,char **argv){
         numLen++;
         token=strtok(NULL,",");
     }
-
-    //transmit to GPU
+    //GPU data transfer
     printf("started gpu sect\n");
     int* cudaInp;
-    int* inpLen;
-    int* resArr;
-    int* resLen;
-    int* resLenHost;
     cudaMalloc((void**)&cudaInp,numLen*sizeof(int));
+    cudaMemcpy(cudaInp, inp, numLen*sizeof(int), cudaMemcpyHostToDevice);
+    int* inpLen;
     cudaMalloc((void**)&inpLen,sizeof(int));
-    cudaMalloc((void**)&resArr,numLen*sizeof(int));
-    cudaMalloc((void**)&resLen,sizeof(int));
-    cudaMemcpy(cudaInp, &inp, numLen*sizeof(int), cudaMemcpyHostToDevice);
     cudaMemcpy(inpLen,&numLen,sizeof(int),cudaMemcpyHostToDevice);
-
+    int* resLen;
+    cudaMalloc((void**)&resLen,sizeof(int));
+    int** resArr;
+    
     //run kernel
-    kern<<<NUM_BLOCKS, BLOCK_WIDTH>>>(cudaInp,inpLen,resArr, resLen);
+    driver<<<NUM_BLOCKS, BLOCK_WIDTH>>>(cudaInp,inpLen,resArr, resLen);
     cudaDeviceSynchronize();
-    cudaMemcpy(inp, resArr, numLen*sizeof(int), cudaMemcpyDeviceToHost);
-    cudaMemcpy(resLenHost,resLen,sizeof(int),cudaMemcpyDeviceToHost);
-    printf("%d\n",*resLenHost);
-    for(int j=0; j<*resLenHost;j++){
+    
+    //recover data
+    int resLenHost;
+    cudaMemcpy(&resLenHost,resLen,sizeof(int),cudaMemcpyDeviceToHost);
+    printf("Result is size %i\n",resLenHost);
+    
+    cudaMemcpy(inp, resArr, resLenHost*sizeof(int), cudaMemcpyDeviceToHost);
+    for(int j=0; j<resLenHost;j++){
         printf("%d\n",inp[j]);
     }
     cudaFree(cudaInp);
+    cudaFree(inpLen);
+    cudaFree(*resArr);
+    cudaFree(resLen);
 }
