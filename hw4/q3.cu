@@ -7,17 +7,17 @@ __global__ void oddCheck(int* nums,int*len, int* out){
     if (index<*len){ out[index]=nums[index]%2; }
 }
 
-//todo check this
+//todo validate this
 __global__ void upSweep(int* arr, int* len, int step){
     int index=threadIdx.x + blockIdx.x*tpb;
-    if(((index+1)%(step*2)!=0) || index==0) return;
+    if((((index+1)%(step*2))!=0) || index==0) return;
     arr[index]=arr[index]+arr[index-step];
 }
 
-//todo finish this
+//todo validate this
 __global__ void downSweep(int* arr, int* len, int step){
     int index=threadIdx.x + blockIdx.x*tpb;
-    if(((index+1)%(step*2)!=0) || index==0) return;
+    if((((index+1)%(step*2))!=0) || index==0) return;
     int tmp=arr[index-step];
     arr[index-step]=arr[index];
     arr[index]+=tmp;
@@ -83,7 +83,7 @@ void driver(int* cudaInp,int inpLen,int* cudInpLen, int* resLen){
     cudaFree(prefix);
 }
 
-int main(int argc,char **argv){
+int main2(int argc,char **argv){
     //read array in
     char buff[50000];
     int inp[15000];
@@ -119,4 +119,18 @@ int main(int argc,char **argv){
     cudaFree(cudaInp);
     cudaFree(inpLen);
     cudaFree(resLen);
+}
+
+int main(int argc,char **argv){
+    int nums[8]= {1,2,3,4,5,6,7,8};
+    int Len=8;
+    int* cudLen;
+    cudaMalloc(&cudLen,sizeof(int));
+    cudaMemcpy(cudLen,Len,sizeof(int),cudaMemcpyHostToDevice);
+    int* cudNum;
+    cudaMalloc(&cudNum,8*sizeof(int));
+    cudaMemcpy(cudNum,nums,8*sizeof(int),cudaMemcpyHostToDevice);
+
+    upSweep<<<2,4>>>(cudNum, cudLen, 1);
+    printArr(cudNum,cudLen);
 }
