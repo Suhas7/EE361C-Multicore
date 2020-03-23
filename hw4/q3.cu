@@ -2,6 +2,17 @@
 #include <string.h>
 #define  tpb 32
 //todo parallelize
+__global__ void upSweep(int* arr, int* len, int* step){
+    int index=threadIdx.x + blockIdx.x*tpb;
+    if(((index+1)%(step*2)!=0) || index==0) return;
+    arr[index]=arr[index]+arr[index-step];
+}
+__global__ void downSweep(int* arr, int* len, int* step){
+    int index=threadIdx.x + blockIdx.x*tpb;
+    if(((index+1)%(step*2)!=0) || index==0) return;
+    arr[index]=arr[index]+arr[index-step];
+}
+
 __global__ void prefixSum(int* inp, int* inpLen, int* res, int* resLen){
     int runningTotal=0;
     int length=*inpLen;
