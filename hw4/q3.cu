@@ -60,7 +60,7 @@ int main(int argc,char **argv){
         token=strtok(NULL,",");
     }
     int* nums = inp;
-    int Len=16;
+    int Len=8192;
     int* cudLen;
     cudaMalloc(&cudLen,sizeof(int));
     cudaMemcpy(cudLen,&Len,sizeof(int),cudaMemcpyHostToDevice);
@@ -71,19 +71,16 @@ int main(int argc,char **argv){
     cudaMalloc(&out,(Len+1)*sizeof(int));
     int* last;
     cudaMalloc(&last,sizeof(int));
-
     oddCheck<<<(Len+tpb)/tpb,tpb>>>(cudNum,cudLen,out,last);
-    for(int step=1; step<8; step*=2){
+    for(int step=1; step<Len; step*=2){
         upSweep<<<(Len+tpb)/tpb,tpb>>>(out,cudLen,step);
     }
-    //res[(*inpLen)-1]=0;
     for(int step=Len/2; step>0; step/=2){
         downSweep<<<(Len+tpb)/tpb,tpb>>>(out,cudLen,step);
     }
     int* shifted;
     cudaMalloc(&shifted,Len*sizeof(int));
     exToIn<<<(Len+tpb)/tpb,tpb>>>(out,shifted,cudLen,last);
-    //printArr<<<1,1>>>(shifted,cudLen);
     int* cudOut;
     cudaMalloc((void**) &cudOut, Len*sizeof(int));
     //postprocess to make an array of odds
