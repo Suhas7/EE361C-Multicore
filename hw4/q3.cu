@@ -1,16 +1,35 @@
 #include <stdio.h>
 #include <string.h>
 #define  tpb 32
-//todo parallelize
+
+__global__ void oddCheck(int* nums,int*len, int* out){
+    int index=threadIdx.x + blockIdx.x*tpb;
+    if (index<*len){ out[index]=nums[index]%2; }
+}
+
+//todo check this
 __global__ void upSweep(int* arr, int* len, int* step){
     int index=threadIdx.x + blockIdx.x*tpb;
     if(((index+1)%(step*2)!=0) || index==0) return;
     arr[index]=arr[index]+arr[index-step];
 }
+
+//todo finish this
 __global__ void downSweep(int* arr, int* len, int* step){
     int index=threadIdx.x + blockIdx.x*tpb;
     if(((index+1)%(step*2)!=0) || index==0) return;
     arr[index]=arr[index]+arr[index-step];
+}
+
+void prefixSumP(int* inp, int* inpLen, int* res, int* resLen){
+    oddCheck<<<(inpLen+tpb)/tpb,tpb>>>(inp,inpLen,res);
+    for(int step=1; step<*inpLen; step*=2){
+        upSweep<<<(inpLen+tpb)/tpb,tpb>>>(res,inpLen,step);
+    }
+    for(int step=inpLen; step>0; step/=2){
+        downSweep<<<(inpLen+tpb)/tpb,tpb>>>(res,inpLen,step);
+    }
+    *resLen=res[(*inpLen)-1];
 }
 
 __global__ void prefixSum(int* inp, int* inpLen, int* res, int* resLen){
@@ -22,6 +41,8 @@ __global__ void prefixSum(int* inp, int* inpLen, int* res, int* resLen){
     }:
     *resLen=runningTotal;
 }
+
+
 
 __global__ void copyOddsP(int*inp, int*prefix, int*inpLen,int*out){
     if((blockIdx.x+threadIdx.x)==0){ out[0]=inp[0];}
