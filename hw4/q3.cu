@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#define NUM_BLOCKS 1
-#define BLOCK_WIDTH 1
 
 //todo parallelize
 __device__ void prefixSum(int* inp, int* inpLen, int* res, int* resLen){
@@ -23,17 +21,25 @@ __device__ void copyOdds(int* inp, int* prefix, int* inpLen){
 }
 
 __global__ void driver(int* cudaInp,int* inpLen, int* resLen){
-    int* prefix = (int*) malloc((*inpLen)*sizeof(int));
-    //compute prefixSum
-    prefixSum(cudaInp, inpLen, prefix,resLen);
-    //postprocess to make an array of odds
-    *resLen=prefix[*inpLen-1];
+    int* prefix;
+    //t index = threadIdx.x + blockIdx.x * THREADS_PER_BLOCK;
+    if(threadIdx.x==0){
+        prefix = (int*) malloc((*inpLen)*sizeof(int));
+        //compute prefixSum
+        prefixSum(cudaInp, inpLen, prefix,resLen);
+        //postprocess to make an array of odds
+        *resLen=prefix[*inpLen-1];
+    }
+    __syncthreads();
+    if(threadIdx.x==0){
     copyOdds(cudaInp, prefix, inpLen);
     //print output
     for(int i=0; i<*resLen; i++){
         printf("%d\n",cudaInp[i]);
     }
     free(prefix);
+    }
+    
 }
 
 int main(int argc,char **argv){
@@ -63,7 +69,7 @@ int main(int argc,char **argv){
     cudaMalloc((void**)&resLen,sizeof(int));
     
     //run kernel
-    driver<<<NUM_BLOCKS, BLOCK_WIDTH>>>(cudaInp,inpLen, resLen);
+    driver<<<1,2>>>(cudaInp,inpLen, resLen);
     cudaDeviceSynchronize();
 
     //recover data
