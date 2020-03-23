@@ -13,7 +13,9 @@ __global__ void exToIn(int* inp, int* out, int*len, int*last){
     if((index>0)&&(index<*len)){
         out[index-1]=inp[index];
     }
-    if(index==((*len)-1)) out[index]=inp[index]+*last;
+    if(index==((*len)-1)) { out[index]=inp[index]+*last;
+    *last=out[index];
+    }
 }
 
 __global__ void upSweep(int* arr, int* len, int step){
@@ -83,9 +85,8 @@ int main(int argc,char **argv){
     exToIn<<<(Len+tpb)/tpb,tpb>>>(out,shifted,cudLen,last);
     int* cudOut;
     cudaMalloc((void**) &cudOut, Len*sizeof(int));
-    //postprocess to make an array of odds
     copyOddsP<<<(Len+tpb)/tpb,tpb>>>(cudNum, shifted, cudLen,cudOut); 
-    printArr<<<1,1>>>(cudOut,cudLen);
+    printArr<<<1,1>>>(cudOut,last);
     cudaFree(cudLen);
     cudaFree(cudNum);
     return 0;
