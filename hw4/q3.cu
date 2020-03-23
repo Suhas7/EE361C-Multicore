@@ -2,44 +2,52 @@
 #include <string.h>
 #define  tpb 32
 
-__global__ void oddCheck(int* nums,int*len, int* out){
+__global__ void oddCheck(int* nums,int*len, int* out, int* last){
     int index=threadIdx.x + blockIdx.x*tpb;
-    if (index<*len){ out[index]=nums[index]%2; }
+    if (index<*len) out[index]=nums[index]%2;
+    if(index==((*len)-1)) *last=nums[index]+*last;
 }
 
-//todo validate this
+__global__ void exToIn(int* inp, int* out, int*len, int*last){
+    int index=threadIdx.x + blockIdx.x*tpb;
+    if((index>0)&&(index<*len)){
+        out[index-1]=inp[index];
+    }
+    if(index==((*len)-1)) out[index]=inp[index]+*last;
+}
+
 __global__ void upSweep(int* arr, int* len, int step){
     int index=threadIdx.x + blockIdx.x*tpb;
-    if((((index+1)%(step*2))!=0) || index==0) return;
+    if((((index+1)%(step*2))!=0) || index==0 || ((*len)<=index)) return;
     arr[index]=arr[index]+arr[index-step];
 }
 
-//todo validate this
 __global__ void downSweep(int* arr, int* len, int step){
     int index=threadIdx.x + blockIdx.x*tpb;
-    if((((index+1)%(step*2))!=0) || index==0) return;
+    if(2*step==*len) arr[(*len)-1]=0;
+    if((((index+1)%(step*2))!=0) || (index==0) || ((*len)<=index)) return;
     int tmp=arr[index-step];
     arr[index-step]=arr[index];
     arr[index]+=tmp;
 }
 
 __global__ void printArr(int* arr,int*len){
-    for(int i=0;i<(*len);i++) printf("%d",arr[i]);
+    for(int i=0;i<(*len);i++) printf("%d\n",arr[i]);
 }
 
 void prefixSumP(int* inp, int* inpLen, int* res, int* resLen){
-    oddCheck<<<((*inpLen)+tpb)/tpb,tpb>>>(inp,inpLen,res);
+    //oddCheck<<<((*inpLen)+tpb)/tpb,tpb>>>(inp,inpLen,res);
     for(int step=1; step<*inpLen; step*=2){
-        upSweep<<<((*inpLen)+tpb)/tpb,tpb>>>(res,inpLen,step);
+        //upSweep<<<((*inpLen)+tpb)/tpb,tpb>>>(res,inpLen,step);
+        upSweep<<<1,8>>>(res,inpLen,step);
     }
     //res[(*inpLen)-1]=0;
-    for(int step=*inpLen; step>0; step/=2){
-        downSweep<<<((*inpLen)+tpb)/tpb,tpb>>>(res,inpLen,step);
+    for(int step=(*inpLen)/2; step>0; step/=2){
+        //downSweep<<<((*inpLen)+tpb)/tpb,tpb>>>(res,inpLen,step);
+        downSweep<<<1,8>>>(res,inpLen,step);
     }
-    printf("kernel print start");
     printArr<<<1,1>>>(res,inpLen);
-    printf("kernel print end");
-    *resLen=res[(*inpLen)-1]+(inp[(*inpLen)-1]%2);
+    //*resLen=res[(*inpLen)-1]+(inp[(*inpLen)-1]%2);
 }
 
 __global__ void prefixSum(int* inp, int* inpLen, int* res, int* resLen){
@@ -119,18 +127,42 @@ int main2(int argc,char **argv){
     cudaFree(cudaInp);
     cudaFree(inpLen);
     cudaFree(resLen);
+    return 0;
 }
 
 int main(int argc,char **argv){
-    int nums[8]= {1,2,3,4,5,6,7,8};
+    int nums[10]= {1,2,3,4,5,6,7,8,9,10};
     int Len=8;
     int* cudLen;
     cudaMalloc(&cudLen,sizeof(int));
-    cudaMemcpy(cudLen,Len,sizeof(int),cudaMemcpyHostToDevice);
+    cudaMemcpy(cudLen,&Len,sizeof(int),cudaMemcpyHostToDevice);
     int* cudNum;
-    cudaMalloc(&cudNum,8*sizeof(int));
-    cudaMemcpy(cudNum,nums,8*sizeof(int),cudaMemcpyHostToDevice);
+    cudaMalloc(&cudNum,(Len)*sizeof(int));
+    cudaMemcpy(cudNum,nums,(Len)*sizeof(int),cudaMemcpyHostToDevice);
+    int* out;
+    cudaMalloc(&out,(Len+1)*sizeof(int));
+    int* last;
+    cudaMalloc(&last,sizeof(int));
 
-    upSweep<<<2,4>>>(cudNum, cudLen, 1);
-    printArr(cudNum,cudLen);
+    oddCheck<<<(Len+tpb)/tpb,tpb>>>(cudNum,cudLen,out,last);
+    for(int step=1; step<8; step*=2){
+        upSweep<<<(Len+tpb)/tpb,tpb>>>(out,cudLen,step);
+    }
+    //res[(*inpLen)-1]=0;
+    for(int step=Len/2; step>0; step/=2){
+        downSweep<<<(Len+tpb)/tpb,tpb>>>(out,cudLen,step);
+    }
+    int* shifted;
+    cudaMalloc(&shifted,Len*sizeof(int));
+    exToIn<<<(Len+tpb)/tpb,tpb>>>(out,shifted,cudLen,last);
+    printArr<<<1,1>>>(shifted,cudLen);
+    //prefixSumP(cudNum, cudLen, out, cudLen);
+    int* cudOut;
+    cudaMalloc((void**) &cudOut, Len*sizeof(int));
+    //postprocess to make an array of odds
+    copyOddsP<<<(Len+tpb)/tpb,tpb>>>(cudNum, shifted, cudLen,cudOut); 
+    printArr<<<1,1>>>(cudOut,cudLen);
+    cudaFree(cudLen);
+    cudaFree(cudNum);
+    return 0;
 }
