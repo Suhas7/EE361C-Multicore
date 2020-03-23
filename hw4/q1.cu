@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#define NUM_BLOCKS 16
-#define BLOCK_WIDTH 1
 #define THREADS_PER_BLOCK 32
 
 __global__ void minA_cuda(int* a, int* b, int len) {
