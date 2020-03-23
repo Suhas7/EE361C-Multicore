@@ -8,28 +8,38 @@ __global__ void oddCheck(int* nums,int*len, int* out){
 }
 
 //todo check this
-__global__ void upSweep(int* arr, int* len, int* step){
+__global__ void upSweep(int* arr, int* len, int step){
     int index=threadIdx.x + blockIdx.x*tpb;
     if(((index+1)%(step*2)!=0) || index==0) return;
     arr[index]=arr[index]+arr[index-step];
 }
 
 //todo finish this
-__global__ void downSweep(int* arr, int* len, int* step){
+__global__ void downSweep(int* arr, int* len, int step){
     int index=threadIdx.x + blockIdx.x*tpb;
     if(((index+1)%(step*2)!=0) || index==0) return;
-    arr[index]=arr[index]+arr[index-step];
+    int tmp=arr[index-step];
+    arr[index-step]=arr[index];
+    arr[index]+=tmp;
+}
+
+__global__ void printArr(int* arr,int*len){
+    for(int i=0;i<(*len);i++) printf("%d",arr[i]);
 }
 
 void prefixSumP(int* inp, int* inpLen, int* res, int* resLen){
-    oddCheck<<<(inpLen+tpb)/tpb,tpb>>>(inp,inpLen,res);
+    oddCheck<<<((*inpLen)+tpb)/tpb,tpb>>>(inp,inpLen,res);
     for(int step=1; step<*inpLen; step*=2){
-        upSweep<<<(inpLen+tpb)/tpb,tpb>>>(res,inpLen,step);
+        upSweep<<<((*inpLen)+tpb)/tpb,tpb>>>(res,inpLen,step);
     }
-    for(int step=inpLen; step>0; step/=2){
-        downSweep<<<(inpLen+tpb)/tpb,tpb>>>(res,inpLen,step);
+    //res[(*inpLen)-1]=0;
+    for(int step=*inpLen; step>0; step/=2){
+        downSweep<<<((*inpLen)+tpb)/tpb,tpb>>>(res,inpLen,step);
     }
-    *resLen=res[(*inpLen)-1];
+    printf("kernel print start");
+    printArr<<<1,1>>>(res,inpLen);
+    printf("kernel print end");
+    *resLen=res[(*inpLen)-1]+(inp[(*inpLen)-1]%2);
 }
 
 __global__ void prefixSum(int* inp, int* inpLen, int* res, int* resLen){
@@ -38,11 +48,9 @@ __global__ void prefixSum(int* inp, int* inpLen, int* res, int* resLen){
     for(int i=0; i<length;i++){
         if((inp[i]%2)==1) runningTotal++;
         res[i]=runningTotal;
-    }:
+    }
     *resLen=runningTotal;
 }
-
-
 
 __global__ void copyOddsP(int*inp, int*prefix, int*inpLen,int*out){
     if((blockIdx.x+threadIdx.x)==0){ out[0]=inp[0];}
