@@ -3,7 +3,7 @@
 #define NUM_BLOCKS 1
 #define BLOCK_WIDTH 1
 
-//todo this needs parallelization
+//todo parallelize
 __device__ void prefixSum(int* inp, int* inpLen, int* res, int* resLen){
     int runningTotal=0;
     int length=*inpLen;
@@ -14,27 +14,21 @@ __device__ void prefixSum(int* inp, int* inpLen, int* res, int* resLen){
     *resLen=runningTotal;
 }
 
-__device__ void copyInt(int* dest, int* source){
-    *dest=*source;
-}
-
-__device__ void copyOdds(int* inp, int* prefix, int* inpLen, int* out){
-    if(prefix[0]==1) out[0]=inp[0];
-    //todo parallelize this loop
+__device__ void copyOdds(int* inp, int* prefix, int* inpLen){
+    if(prefix[0]==1) inp[0]=inp[0];
+    //todo parallelize
     for(int i=1; i<*inpLen; i++){
         if(prefix[i]!=prefix[i-1]) inp[prefix[i]-1]=inp[i];
     }
 }
 
-__global__ void driver(int* cudaInp,int* inpLen,int** resArr, int* resLen){
+__global__ void driver(int* cudaInp,int* inpLen, int* resLen){
     int* prefix = (int*) malloc((*inpLen)*sizeof(int));
     //compute prefixSum
     prefixSum(cudaInp, inpLen, prefix,resLen);
-    //allocate output array
-    *resArr = (int*) malloc((*resLen)*sizeof(int));
     //postprocess to make an array of odds
     *resLen=prefix[*inpLen-1];
-    copyOdds(cudaInp, prefix, inpLen, *resArr);
+    copyOdds(cudaInp, prefix, inpLen);
     //print output
     for(int i=0; i<*resLen; i++){
         printf("%d\n",cudaInp[i]);
@@ -67,20 +61,17 @@ int main(int argc,char **argv){
     cudaMemcpy(inpLen,&numLen,sizeof(int),cudaMemcpyHostToDevice);
     int* resLen;
     cudaMalloc((void**)&resLen,sizeof(int));
-    int** resArr;
-    cudaMalloc((void**)&resArr,sizeof(int*));
     
     //run kernel
-    driver<<<NUM_BLOCKS, BLOCK_WIDTH>>>(cudaInp,inpLen,resArr, resLen);
+    driver<<<NUM_BLOCKS, BLOCK_WIDTH>>>(cudaInp,inpLen, resLen);
     cudaDeviceSynchronize();
 
     //recover data
     int resLenHost=7;
     cudaMemcpy(&resLenHost,resLen,sizeof(int),cudaMemcpyDeviceToHost);
     printf("Result is size %i\n",resLenHost);
-    /*
+    
     cudaFree(cudaInp);
     cudaFree(inpLen);
-    cudaFree(*resArr);
     cudaFree(resLen);
-*/}
+}
