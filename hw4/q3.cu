@@ -35,7 +35,8 @@ __global__ void downSweep(int* arr, int* len, int* tLen, int step){
 }
 
 __global__ void printArr(int* arr,int*len){
-    for(int i=0;i<(*len);i++) printf("%d\n",arr[i]);
+    for(int i=0;i<((*len)-1);i++) printf("%d, ",arr[i]);
+    printf("%d",arr[(*len)-1]);
 }
 
 __global__ void copyOddsP(int*inp, int*prefix, int*inpLen,int*out){
