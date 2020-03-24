@@ -62,7 +62,9 @@ int main(int argc,char **argv){
         token=strtok(NULL,",");
     }
     int* nums = inp;
-    int Len=8192;
+    int falseLen=1;
+    while(falseLen<numLen) falseLen*=2;
+    int Len=falseLen;
     int* cudLen;
     cudaMalloc(&cudLen,sizeof(int));
     cudaMemcpy(cudLen,&Len,sizeof(int),cudaMemcpyHostToDevice);
@@ -80,12 +82,16 @@ int main(int argc,char **argv){
     for(int step=Len/2; step>0; step/=2){
         downSweep<<<(Len+tpb)/tpb,tpb>>>(out,cudLen,step);
     }
+    Len=numLen;
+    cudaMemcpy(cudLen,&Len,sizeof(int),cudaMemcpyHostToDevice);
     int* shifted;
     cudaMalloc(&shifted,Len*sizeof(int));
     exToIn<<<(Len+tpb)/tpb,tpb>>>(out,shifted,cudLen,last);
     int* cudOut;
     cudaMalloc((void**) &cudOut, Len*sizeof(int));
     copyOddsP<<<(Len+tpb)/tpb,tpb>>>(cudNum, shifted, cudLen,cudOut); 
+    int x;
+    cudaMemcpy(&x,last,sizeof(int),cudaMemcpyDeviceToHost);
     printArr<<<1,1>>>(cudOut,last);
     cudaFree(cudLen);
     cudaFree(cudNum);
