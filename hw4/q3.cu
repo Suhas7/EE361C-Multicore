@@ -95,5 +95,9 @@ int main(int argc,char **argv){
     printArr<<<1,1>>>(cudOut,last);
     cudaFree(cudLen);
     cudaFree(cudNum);
+    cudaFree(out);
+    cudaFree(last);
+    cudaFree(shifted);
+    cudaFree(cudOut);
     return 0;
 }
