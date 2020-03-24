@@ -18,16 +18,17 @@ __global__ void exToIn(int* inp, int* out, int*len, int*last){
     }
 }
 
-__global__ void upSweep(int* arr, int* len, int step){
+__global__ void upSweep(int* arr, int* len, int* tLen, int step){
     int index=threadIdx.x + blockIdx.x*tpb;
+    if(index>*tLen) return;
     if((((index+1)%(step*2))!=0) || index==0 || ((*len)<=index)) return;
     arr[index]=arr[index]+arr[index-step];
 }
 
-__global__ void downSweep(int* arr, int* len, int step){
+__global__ void downSweep(int* arr, int* len, int* tLen, int step){
     int index=threadIdx.x + blockIdx.x*tpb;
     if(2*step==*len) arr[(*len)-1]=0;
-    if((((index+1)%(step*2))!=0) || (index==0) || ((*len)<=index)) return;
+    if((((index+1)%(step*2))!=0) || (index==0) || ((*len)<=index)) return;    
     int tmp=arr[index-step];
     arr[index-step]=arr[index];
     arr[index]+=tmp;
@@ -68,6 +69,9 @@ int main(int argc,char **argv){
     int* cudLen;
     cudaMalloc(&cudLen,sizeof(int));
     cudaMemcpy(cudLen,&Len,sizeof(int),cudaMemcpyHostToDevice);
+    int* trueLen;
+    cudaMalloc(&trueLen,sizeof(int));
+    cudaMemcpy(trueLen,&numLen,sizeof(int),cudaMemcpyHostToDevice);
     int* cudNum;
     cudaMalloc(&cudNum,(Len)*sizeof(int));
     cudaMemcpy(cudNum,nums,(Len)*sizeof(int),cudaMemcpyHostToDevice);
@@ -77,21 +81,19 @@ int main(int argc,char **argv){
     cudaMalloc(&last,sizeof(int));
     oddCheck<<<(Len+tpb)/tpb,tpb>>>(cudNum,cudLen,out,last);
     for(int step=1; step<Len; step*=2){
-        upSweep<<<(Len+tpb)/tpb,tpb>>>(out,cudLen,step);
+        upSweep<<<(Len+tpb)/tpb,tpb>>>(out,cudLen,trueLen,step);
     }
     for(int step=Len/2; step>0; step/=2){
-        downSweep<<<(Len+tpb)/tpb,tpb>>>(out,cudLen,step);
+        downSweep<<<(Len+tpb)/tpb,tpb>>>(out,cudLen,trueLen,step);
     }
     Len=numLen;
-    cudaMemcpy(cudLen,&Len,sizeof(int),cudaMemcpyHostToDevice);
+    cudLen=trueLen;
     int* shifted;
     cudaMalloc(&shifted,Len*sizeof(int));
     exToIn<<<(Len+tpb)/tpb,tpb>>>(out,shifted,cudLen,last);
     int* cudOut;
     cudaMalloc((void**) &cudOut, Len*sizeof(int));
     copyOddsP<<<(Len+tpb)/tpb,tpb>>>(cudNum, shifted, cudLen,cudOut); 
-    int x;
-    cudaMemcpy(&x,last,sizeof(int),cudaMemcpyDeviceToHost);
     printArr<<<1,1>>>(cudOut,last);
     cudaFree(cudLen);
     cudaFree(cudNum);
