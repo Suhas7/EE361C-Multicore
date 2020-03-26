@@ -34,11 +34,6 @@ __global__ void downSweep(int* arr, int* len, int* tLen, int step){
     arr[index]+=tmp;
 }
 
-__global__ void printArr(int* arr,int*len){
-    //printf("%d",*len);
-    for(int i=0;i<(*len);i++) printf("%d\n",arr[i]);
-}
-
 __global__ void copyOddsP(int*inp, int*prefix, int*inpLen,int*out){
     if((blockIdx.x+threadIdx.x)==0){ out[0]=inp[0];}
     else if((blockIdx.x+threadIdx.x)<*inpLen){
@@ -65,7 +60,6 @@ int* filter(int* cudNum, int numLen, int bit, int value, int** zeroLen){
     int* trueLen;
     cudaMalloc(&trueLen,sizeof(int));
     cudaMemcpy(trueLen,&numLen,sizeof(int),cudaMemcpyHostToDevice);
-    //printArr<<<1,1>>>(cudNum,trueLen);
     int* out;
     cudaMalloc(&out,(Len+1)*sizeof(int));
     int* last;
@@ -130,4 +124,12 @@ int main(int argc,char **argv){
     }
     cudaMemcpy(inp,cudNum,numLen*sizeof(int),cudaMemcpyDeviceToHost);
     for(int j=0; j<numLen; j++) printf("%d\n",inp[j]);
+    fclose(fp);
+    FILE* fp_end = fopen("q4.txt", "w");
+    for (int i = 0; i < len; i++) {
+        fprintf(fp_end, "%d", inp[i]);
+        if (i != len-1) {
+            fprintf(fp_end, ", ");
+        }
+    }
 }

@@ -95,7 +95,17 @@ int main(int argc,char **argv){
     int* cudOut;
     cudaMalloc((void**) &cudOut, Len*sizeof(int));
     copyOddsP<<<(Len+tpb)/tpb,tpb>>>(cudNum, shifted, cudLen,cudOut); 
-    printArr<<<1,1>>>(cudOut,last);
+    int len;
+    cudaMemcpy(&len,last,sizeof(int),cudaMemcpyDeviceToHost);
+    cudaMemcpy(inp,cudOut,len*sizeof(int),cudaMemcpyDeviceToHost);
+    fclose(fp);
+    FILE* fp_end = fopen("q3.txt", "w");
+    for (int i = 0; i < len; i++) {
+        fprintf(fp_end, "%d", inp[i]);
+        if (i != len-1) {
+            fprintf(fp_end, ", ");
+        }
+    }
     cudaFree(cudLen);
     cudaFree(cudNum);
     cudaFree(out);
