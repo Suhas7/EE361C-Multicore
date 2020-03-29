@@ -36,7 +36,7 @@ __global__ void part_b_cuda(int* a, int* b, int len)
 
 __global__ void part_c_cuda(int* a, int* b)
 {
-	//part c, prefix sum with 10 elements
+    b[threadIdx.x] = 0;
     for (int i = 0; i <= threadIdx.x; i++) {
         b[threadIdx.x] += a[i];
     }
@@ -65,6 +65,7 @@ void part_a() {
     for (int i = 0; i < len; i++) {
     	A[i] = inp[i];
     }
+    fclose(fp);
 
     //cuda stuff
     int *d_a, *d_b;
@@ -75,18 +76,12 @@ void part_a() {
     cudaDeviceSynchronize();
     cudaMemcpy(B, d_b, sizeof(int) * 10, cudaMemcpyDeviceToHost);
 
-    //Print final values
-    /*
-    for(int i = 0; i < 10; i++) {
-    	printf("%d, ", B[i]);
-    }
-    */
-    fclose(fp);
+    
 	FILE* fp_end = fopen("q2a.txt", "w");
 	for (int i = 0; i < 10; i++) {
-		fputc(B[i] + '0', fp_end);
+		fprintf(fp_end, "%d", B[i]);
 		if (i != 9) {
-			fputc(', ', fp_end);
+			fprintf(fp_end, "%s", ", ");
 		}
 	}
 	fclose(fp_end);
@@ -117,6 +112,7 @@ void part_b() {
     for (int i = 0; i < len; i++) {
     	A[i] = inp[i];
     }
+    fclose(fp);
 
     //cuda stuff
     int *d_a, *d_b;
@@ -127,18 +123,11 @@ void part_b() {
     cudaDeviceSynchronize();
     cudaMemcpy(B, d_b, sizeof(int) * 10, cudaMemcpyDeviceToHost);
 
-    //Print final values
-    /*
-    for(int i = 0; i < 10; i++) {
-    	printf("%d, ", B[i]);
-    }
-    */
-    fclose(fp);
 	FILE* fp_end = fopen("q2b.txt", "w");
 	for (int i = 0; i < 10; i++) {
-		fputc(B[i] + '0', fp_end);
+		fprintf(fp_end, "%d", B[i]);
 		if (i != 9) {
-			fputc(', ', fp_end);
+			fprintf(fp_end, "%s", ", ");
 		}
 	}
 	fclose(fp_end);
@@ -170,6 +159,7 @@ void part_c() {
     for (int i = 0; i < len; i++) {
     	A[i] = inp[i];
     }
+    fclose(fp);
 
     //cuda stuff
     int *d_a, *d_b, *d_c;
@@ -179,21 +169,24 @@ void part_c() {
     part_b_cuda<<<(len + THREADS_PER_BLOCK)/THREADS_PER_BLOCK, THREADS_PER_BLOCK>>>(d_a, d_b, len);
     cudaDeviceSynchronize();
 
-    fclose(fp);
+    cudaMemcpy(B, d_b, sizeof(int) * 10, cudaMemcpyDeviceToHost);
+    cudaFree(d_b);
     cudaFree(d_a);
 
 	//now do prefix sum of 10 elements in b
     cudaMalloc(&d_c, sizeof(int) * 10);
-    part_c_cuda<<<(10 + THREADS_PER_BLOCK)/THREADS_PER_BLOCK, THREADS_PER_BLOCK>>>(d_b, d_c);
+    cudaMalloc(&d_b, sizeof(int) * 10);
+    cudaMemcpy(d_b, B, sizeof(int) * len, cudaMemcpyHostToDevice);
+    part_c_cuda<<<1, 10>>>(d_b, d_c);
     cudaDeviceSynchronize();
-    cudaMemcpy(d_c, C, sizeof(int) * 10, cudaMemcpyDeviceToHost);
+    cudaMemcpy(C, d_c, sizeof(int) * 10, cudaMemcpyDeviceToHost);
 
     //copy stuff to file
 	FILE* fp_end = fopen("q2c.txt", "w");
 	for (int i = 0; i < 10; i++) {
-		fputc(C[i] + '0', fp_end);
+		fprintf(fp_end, "%d", C[i]);
 		if (i != 9) {
-			fputc(', ', fp_end);
+			fprintf(fp_end, "%s", ", ");
 		}
 	}
 	fclose(fp_end);
