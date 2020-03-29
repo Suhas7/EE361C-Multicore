@@ -5,7 +5,7 @@
 __global__ void bitMask(int* nums,int*len, int* out, int* last, int*bit, int*value){
     int index=threadIdx.x + blockIdx.x*tpb;
     if (index<*len) out[index]=(((nums[index]>>(*bit))%2)==*value);
-    if(index==((*len)-1)) *last=out[index];
+    if (index==((*len)-1)) *last=(((nums[index]>>(*bit))%2)==*value);
 }
 
 __global__ void exToIn(int* inp, int* out, int*len, int*last){
@@ -64,7 +64,8 @@ int* filter(int* cudNum, int numLen, int bit, int value, int** zeroLen){
     cudaMalloc(&out,(Len+1)*sizeof(int));
     int* last;
     cudaMalloc(&last,sizeof(int));
-    bitMask<<<(Len+tpb)/tpb,tpb>>>(cudNum,cudLen,out,last,cBit,cVal);
+    bitMask<<<(Len+tpb)/tpb,tpb>>>(cudNum,trueLen,out,last,cBit,cVal);
+    //(value==0) {printInt<<<1,1>>>(last);printArr<<<1,1>>>(out,trueLen);}
     for(int step=1; step<Len; step*=2){ upSweep<<<(Len+tpb)/tpb,tpb>>>(out,cudLen,trueLen,step); }
     for(int step=Len/2; step>0; step/=2){ downSweep<<<(Len+tpb)/tpb,tpb>>>(out,cudLen,trueLen,step); }
     Len=numLen;
@@ -117,7 +118,7 @@ int main(int argc,char **argv){
     while((1<<maxBit)<numLen) maxBit++;
     cudaMalloc(&cudLen,sizeof(int));
     cudaMemcpy(cudLen,&numLen,sizeof(int),cudaMemcpyHostToDevice); 
-    for(int i=0; i<10; i++){
+    for(int i=0;i<maxBit; i++){
         start=filter(cudNum,numLen,i,0, &zerLen);
         end=filter(cudNum,numLen,i,1,&oneLen);
         copyArr<<<(numLen+tpb)/tpb,tpb>>>(cudNum,start,end,zerLen,oneLen);
@@ -125,6 +126,7 @@ int main(int argc,char **argv){
     cudaMemcpy(inp,cudNum,numLen*sizeof(int),cudaMemcpyDeviceToHost);
     for(int j=0; j<numLen; j++) printf("%d\n",inp[j]);
     fclose(fp);
+    int len=numLen;
     FILE* fp_end = fopen("q4.txt", "w");
     for (int i = 0; i < len; i++) {
         fprintf(fp_end, "%d", inp[i]);
