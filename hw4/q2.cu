@@ -37,6 +37,9 @@ __global__ void part_b_cuda(int* a, int* b, int len)
 __global__ void part_c_cuda(int* a, int* b)
 {
 	//part c, prefix sum with 10 elements
+    for (int i = 0; i <= threadIdx.x; i++) {
+        b[threadIdx.x] += a[i];
+    }
 }
 
 void part_a() {
