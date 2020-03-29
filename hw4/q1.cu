@@ -69,7 +69,8 @@ void last_digit() {
 	for (int i = 0; i < len; i++) {
 		fputc(B[i] + '0', fp_end);
 		if (i != len-1) {
-			fputc(', ', fp_end);
+			fputc(',', fp_end);
+			fputc(' ', fp_end);
 		}
 	}
 
@@ -126,7 +127,7 @@ void minA() {
 
 	    cudaFree(d_a);
 	    cudaFree(d_b);
-	    memcpy(A, B, B_size * sizezof(int));
+	    memcpy(A, B, B_size * sizeof(int));
 	    free(B);
 	    len = B_size;
 	    B_size = (len + 1) / 2;
@@ -134,7 +135,7 @@ void minA() {
 
     //Print output to file
     fclose(fp);
-	FILE* fp_end = fopen("q11.txt", "w");
+	FILE* fp_end = fopen("q1a.txt", "w");
 	fputc(A[0] + '0', fp_end);
 	fclose(fp_end);
 }
