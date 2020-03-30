@@ -87,6 +87,8 @@ void part_a() {
 	fclose(fp_end);
 	cudaFree(d_a);
 	cudaFree(d_b);
+    free(A);
+    free(B);
 }
 
 void part_b() {
@@ -130,9 +132,12 @@ void part_b() {
 			fprintf(fp_end, "%s", ", ");
 		}
 	}
+
 	fclose(fp_end);
 	cudaFree(d_a);
 	cudaFree(d_b);
+    free(A);
+    free(B);
 }
 
 void part_c() {
@@ -147,36 +152,38 @@ void part_c() {
     int len = 0; 
 
     while(token != NULL) {
-		inp[len] = atoi(token+1);
-		len++;
-		token = strtok(NULL, ",");
+        inp[len] = atoi(token+1);
+        len++;
+        token = strtok(NULL, ",");
     }
 
     int* A = (int* )malloc(sizeof(int) * len);
     int* B = (int* )malloc(sizeof(int) * 10);
-    int* C = (int* )malloc(sizeof(int) * 10);
 
     for (int i = 0; i < len; i++) {
-    	A[i] = inp[i];
+        A[i] = inp[i];
     }
     fclose(fp);
 
     //cuda stuff
-    int *d_a, *d_b, *d_c;
+    int *d_a, *d_b;
     cudaMalloc(&d_a, sizeof(int) * len);
     cudaMalloc(&d_b, sizeof(int) * 10);
     cudaMemcpy(d_a, A, sizeof(int) * len, cudaMemcpyHostToDevice);
     part_b_cuda<<<(len + THREADS_PER_BLOCK)/THREADS_PER_BLOCK, THREADS_PER_BLOCK>>>(d_a, d_b, len);
     cudaDeviceSynchronize();
-
     cudaMemcpy(B, d_b, sizeof(int) * 10, cudaMemcpyDeviceToHost);
-    cudaFree(d_b);
+
     cudaFree(d_a);
+    cudaFree(d_b);
+
+    int *d_c;
+    int* C = (int* )malloc(sizeof(int) * 10);
 
 	//now do prefix sum of 10 elements in b
     cudaMalloc(&d_c, sizeof(int) * 10);
     cudaMalloc(&d_b, sizeof(int) * 10);
-    cudaMemcpy(d_b, B, sizeof(int) * len, cudaMemcpyHostToDevice);
+    cudaMemcpy(d_b, B, sizeof(int) * 10, cudaMemcpyHostToDevice);
     part_c_cuda<<<1, 10>>>(d_b, d_c);
     cudaDeviceSynchronize();
     cudaMemcpy(C, d_c, sizeof(int) * 10, cudaMemcpyDeviceToHost);
@@ -190,13 +197,20 @@ void part_c() {
 		}
 	}
 	fclose(fp_end);
-	
+    cudaFree(d_c);
+    cudaFree(d_b);	
+    free(C);
+    free(B);
+    free(A);
 }
 
 int main(int argc, char **argv)
 {
     part_a();
+    cudaDeviceReset();
     part_b();
+    cudaDeviceReset();
     part_c();
+
     return 0;
 }

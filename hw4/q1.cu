@@ -137,6 +137,7 @@ void minA() {
 int main(int argc,char **argv)
 {
     minA();
+    cudaDeviceReset();
     last_digit();
     return 0;
 }
