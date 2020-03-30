@@ -67,9 +67,9 @@ void last_digit() {
 	fclose(fp);
 	FILE* fp_end = fopen("q1b.txt", "w");
 	for (int i = 0; i < len; i++) {
-		fputc(B[i] + '0', fp_end);
+		fprintf(fp_end, "%d", B[i]);
 		if (i != len-1) {
-			fputc(', ', fp_end);
+			fprintf(fp_end, "%s", ", ");
 		}
 	}
 
@@ -97,11 +97,6 @@ void minA() {
 		token = strtok(NULL, ",");
     }
 
-    //Edge case where there is only one element
-    if (len == 1) {
-    	printf("%d", inp[0]);
-    }
-
     //Copy input to array of proper size
     int* A = (int* )malloc(sizeof(int) * len);
     for (int i = 0; i < len; i++) {
@@ -112,7 +107,7 @@ void minA() {
     int B_size = (len + 1) / 2;
     int* B;
 
-    while (B_size != 0) {
+    while (len != 1) {
     	B = (int* )malloc(sizeof(int) * B_size);
 
 		int *d_a, *d_b;
@@ -126,7 +121,7 @@ void minA() {
 
 	    cudaFree(d_a);
 	    cudaFree(d_b);
-	    memcpy(A, B, B_size * sizezof(int));
+	    memcpy(A, B, B_size * sizeof(int));
 	    free(B);
 	    len = B_size;
 	    B_size = (len + 1) / 2;
@@ -134,14 +129,15 @@ void minA() {
 
     //Print output to file
     fclose(fp);
-	FILE* fp_end = fopen("q11.txt", "w");
-	fputc(A[0] + '0', fp_end);
+	FILE* fp_end = fopen("q1a.txt", "w");
+	fprintf(fp_end, "%d", A[0]);
 	fclose(fp_end);
 }
 
 int main(int argc,char **argv)
 {
-    last_digit();
     minA();
+    cudaDeviceReset();
+    last_digit();
     return 0;
 }
