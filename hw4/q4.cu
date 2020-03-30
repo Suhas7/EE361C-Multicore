@@ -118,7 +118,7 @@ int main(int argc,char **argv){
     while((1<<maxBit)<numLen) maxBit++;
     cudaMalloc(&cudLen,sizeof(int));
     cudaMemcpy(cudLen,&numLen,sizeof(int),cudaMemcpyHostToDevice); 
-    for(int i=0;i<maxBit; i++){
+    for(int i=0;i<10; i++){
         start=filter(cudNum,numLen,i,0, &zerLen);
         end=filter(cudNum,numLen,i,1,&oneLen);
         copyArr<<<(numLen+tpb)/tpb,tpb>>>(cudNum,start,end,zerLen,oneLen);
