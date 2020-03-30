@@ -124,7 +124,6 @@ int main(int argc,char **argv){
         copyArr<<<(numLen+tpb)/tpb,tpb>>>(cudNum,start,end,zerLen,oneLen);
     }
     cudaMemcpy(inp,cudNum,numLen*sizeof(int),cudaMemcpyDeviceToHost);
-    for(int j=0; j<numLen; j++) printf("%d\n",inp[j]);
     fclose(fp);
     int len=numLen;
     FILE* fp_end = fopen("q4.txt", "w");
