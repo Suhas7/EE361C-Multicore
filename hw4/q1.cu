@@ -7,8 +7,8 @@ __global__ void minA_cuda(int* a, int* b, int len, int n_output) {
 	int b_index = threadIdx.x + blockIdx.x * THREADS_PER_BLOCK;
     int a_index = b_index * 2;
     
-    if (b_index < n_output) {
-	    if (a_index == len) {
+    if (b_index < n_output && a_index < len) {
+	    if (a_index == len-1) {
 	    	b[b_index] = a[a_index];
 	    }
 	    else {
@@ -108,6 +108,10 @@ void minA() {
     int* B;
 
     while (len != 1) {
+    	for(int i = 0; i < len; i++) {
+    		printf("%d", A[i]);
+    	}
+    	printf("\n");
     	B = (int* )malloc(sizeof(int) * B_size);
 
 		int *d_a, *d_b;
