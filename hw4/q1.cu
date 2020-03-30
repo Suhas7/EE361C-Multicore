@@ -108,10 +108,6 @@ void minA() {
     int* B;
 
     while (len != 1) {
-    	for(int i = 0; i < len; i++) {
-    		printf("%d", A[i]);
-    	}
-    	printf("\n");
     	B = (int* )malloc(sizeof(int) * B_size);
 
 		int *d_a, *d_b;
