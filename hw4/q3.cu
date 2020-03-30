@@ -80,7 +80,7 @@ int main(int argc,char **argv){
     cudaMalloc(&out,(Len+1)*sizeof(int));
     int* last;
     cudaMalloc(&last,sizeof(int));
-    oddCheck<<<(Len+tpb)/tpb,tpb>>>(cudNum,cudLen,out,last);
+    oddCheck<<<(Len+tpb)/tpb,tpb>>>(cudNum,trueLen,out,last);
     for(int step=1; step<Len; step*=2){
         upSweep<<<(Len+tpb)/tpb,tpb>>>(out,cudLen,trueLen,step);
     }
